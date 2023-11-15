@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller("adminBasicConfig")
 @RequestMapping("/admin/config")
 @RequiredArgsConstructor
+
 public class BasicConfigController {
     private final ConfigSaveService saveService;
     private final ConfigInfoService infoService;
