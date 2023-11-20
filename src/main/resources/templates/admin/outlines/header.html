@@ -3,7 +3,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:fragment="common">
     <section class="left">
-        <a th:href="@{/admin}">로고</a>
+        <div class="logo" th:onclick="|location.href='/admin'|">
+            <img th:src="@{/img/logo.svg}" alt="logo">
+            <img th:src="@{/img/logo2.svg}" alt="logo2">
+        </div>
     </section>
     <section class="right">
         <th:block sec:authorize="isAuthenticated()">
