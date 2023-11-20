@@ -38,8 +38,8 @@
     <th:block th:if="${#authorization.expression('isAnonymous')}">
         <div class="header_buttons">
             <!-- Thymeleaf 방식으로 URL 지정 -->
-            <button type="button" class="join_button" th:onclick="|location.href='/day05/member/join'|">회원가입</button>
-            <button type="button" class="login_button">로그인</button>
+            <button type="button" class="join_button" th:onclick="|location.href='/member/join'|">회원가입</button>
+            <button type="button" class="login_button" th:onclick="|location.href='/member/login'|">로그인</button>
         </div>
     </th:block>
 </header>
