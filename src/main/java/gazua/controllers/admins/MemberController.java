@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Controller("adminRoomController")
-@RequestMapping("/admin/room")
+@Controller("adminMemberController")
+@RequestMapping("/admin/member")
 @RequiredArgsConstructor
-public class RoomController implements CommonProcess, ScriptExceptionProcess {
+public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
     private final HttpServletRequest request;
 
@@ -27,35 +27,51 @@ public class RoomController implements CommonProcess, ScriptExceptionProcess {
     @GetMapping
     public String list(Model model) {
         commonProcess("list", model);
-        return "admin/room/list";
+        return "admin/member/list";
     }
 
     /**
-     * 객실 등록 양식
+     * 회원 삭제 양식
+     * @param model
      * @return
      */
-    @GetMapping("/add")
-    public String addRoom(Model model) {
-        commonProcess("add", model);
-        return "admin/room/add";
+    @GetMapping("/delete")
+    public String delete(Model model) {
+        commonProcess("delete", model);
+        return "admin/member/delete";
     }
+
+    /**
+     * 회원 권한 양식
+     * @param model
+     * @return
+     */
+    @GetMapping("/role")
+    public String role(Model model) {
+        commonProcess("role", model);
+        return "admin/member/role";
+    }
+
 
 
     public void commonProcess(String mode, Model model) {
 
-        String pageTitle = "객실 목록";
-        if (mode.equals("add")) {
-            pageTitle = "객실 등록";
+        String pageTitle = "회원 목록";
+
+        if (mode.equals("delete")) {
+            pageTitle = "회원 삭제";
+        } else if (mode.equals("role")) {
+            pageTitle = "회원 권한";
         }
 
         CommonProcess.super.commonProcess(model, pageTitle);
 
-        model.addAttribute("menuCode", "room");
+        model.addAttribute("menuCode", "member");
 
         String subMenuCode = Menu.getSubMenuCode(request);
         model.addAttribute("subMenuCode", subMenuCode);
 
-        List<MenuDetail> submenus = Menu.gets("room");
+        List<MenuDetail> submenus = Menu.gets("member");
         model.addAttribute("submenus", submenus);
     }
 }
