@@ -321,6 +321,7 @@ p {
     border-bottom: 0.1px solid #787878;
 }
 
+
 .select-p-box{
     display: flex;
     justify-content: space-between;
@@ -376,7 +377,7 @@ p {
 }
 
 .select-p-box select{
-    width: 222px;
+    width: 220px;
     border: none;
     text-align: center;
     appearance: none;
