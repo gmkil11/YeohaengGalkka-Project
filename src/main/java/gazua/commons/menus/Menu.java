@@ -26,6 +26,10 @@ public class Menu {
             menus.add(new MenuDetail("board", "게시판 목록", "/admin/board"));
             menus.add(new MenuDetail("register", "게시판 등록", "/admin/board/add"));
             menus.add(new MenuDetail("posts", "게시글 관리", "/admin/board/posts"));
+        } else if (code.equals("room")) {
+            menus.add(new MenuDetail("room", "객실 목록", "/admin/room"));
+            menus.add(new MenuDetail("add", "객실 등록", "/admin/room/add" ));
+            menus.add(new MenuDetail("category", "객실 분류", "/admin/room/category"));
         }
 
         return menus;
