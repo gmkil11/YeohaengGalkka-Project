@@ -9,7 +9,7 @@
         <tr>
             <th>이메일</th>
             <th>이름</th>
-            <!-- 다른 필요한 필드들 추가 -->
+            <!-- 다른 내용 불러올 때 더 추가하기 -->
         </tr>
         </thead>
         <tbody>
@@ -17,7 +17,7 @@
         <tr th:each="member : ${memberList}">
             <td th:text="${member.email}"></td>
             <td th:text="${member.userNm}"></td>
-            <!-- 다른 필요한 필드들 추가 -->
+            <!-- 다른 내용 불러올 때 더 추가하기 -->
         </tr>
         </tbody>
     </table>
