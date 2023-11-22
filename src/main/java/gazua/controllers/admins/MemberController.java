@@ -7,14 +7,18 @@ import gazua.commons.menus.MenuDetail;
 import gazua.entities.Member;
 import gazua.repositories.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller("adminMemberController")
 @RequestMapping("/admin/member")
@@ -22,6 +26,7 @@ import java.util.List;
 public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
     private final HttpServletRequest request;
+    private final HttpServletResponse response;
     private final MemberRepository repository;
 
 
@@ -54,6 +59,15 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
     @GetMapping("/role")
     public String role(Model model) {
         commonProcess("role", model);
+        return "admin/member/role";
+    }
+
+    @PostMapping("/role")
+    public String role_change(@RequestParam String email, Model model) {
+        commonProcess("role", model);
+        Optional<Member> member = repository.findByEmail(email);
+        model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
+
         return "admin/member/role";
     }
 
