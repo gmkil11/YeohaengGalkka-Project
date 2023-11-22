@@ -4,8 +4,23 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 목록</h1>
-    <form >
+    <table>
+        <thead>
+        <tr>
+            <th>이메일</th>
+            <th>이름</th>
+            <!-- 다른 필요한 필드들 추가 -->
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 반복문을 통해 회원 목록을 표시 -->
+        <tr th:each="member : ${memberList}">
+            <td th:text="${member.email}"></td>
+            <td th:text="${member.userNm}"></td>
+            <!-- 다른 필요한 필드들 추가 -->
+        </tr>
+        </tbody>
+    </table>
 
-    </form>
 </section>
 </html>

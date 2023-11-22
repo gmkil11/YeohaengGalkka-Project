@@ -22,11 +22,16 @@ import java.util.List;
 public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
     private final HttpServletRequest request;
+    private final MemberRepository repository;
+
 
 
     @GetMapping
     public String list(Model model) {
         commonProcess("list", model);
+        List<Member> memberList = repository.findAll();
+        model.addAttribute("memberList", memberList);
+
         return "admin/member/list";
     }
 
