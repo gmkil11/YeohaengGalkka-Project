@@ -4,8 +4,37 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 삭제</h1>
-    <form >
+    <form method="post" th:action="@{/admin/member/delete}">
+        <p>삭제할 계정을 검색해주세요</p>
+        <input type="text" placeholder="이메일을 입력해주세요" name="email">
 
+        <button type="submit" name="submitButton" value="search">검색</button>
     </form>
+    <th:block th:if="${member}">
+        <form method="post" th:action="@{/admin/member/delete}">
+            <table>
+                <thead>
+                <tr>
+                    <th>이메일</th>
+                    <th>유저명</th>
+                    <th>현재 권한</th>
+                    <!-- 다른 내용 불러올 때 더 추가하기 -->
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 반복문을 통해 회원 목록을 표시 -->
+                <tr>
+                    <td th:text="${member.email}"></td>
+                    <td th:text="${member.userNm}"></td>
+                    <td th:text="${member.mtype}"></td>
+                    <td>
+                        <button type="submit" name="submitButton" value="delete">삭제</button>
+                    </td>
+                    <!-- 다른 내용 불러올 때 더 추가하기 -->
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </th:block>
 </section>
 </html>

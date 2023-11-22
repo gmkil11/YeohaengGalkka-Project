@@ -4,23 +4,29 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 목록</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>이메일</th>
-            <th>이름</th>
-            <!-- 다른 내용 불러올 때 더 추가하기 -->
-        </tr>
-        </thead>
-        <tbody>
-        <!-- 반복문을 통해 회원 목록을 표시 -->
-        <tr th:each="member : ${memberList}">
-            <td th:text="${member.email}"></td>
-            <td th:text="${member.userNm}"></td>
-            <!-- 다른 내용 불러올 때 더 추가하기 -->
-        </tr>
-        </tbody>
-    </table>
+    <form method="post" th:action="@{/admin/member}">
+        <table>
+            <thead>
+            <tr>
+                <th>이메일</th>
+                <th>이름</th>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 반복문을 통해 회원 목록을 표시 -->
+            <tr th:each="member : ${memberList}">
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.userNm}"></td>
+                <td>
+                    <button type="submit" name="submitButton" value="delete">삭제</button>
+                    <button type="submit" name="submitButton" value="role">권한 수정</button>
+                </td>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </tbody>
+        </table>
+    </form>
 
 </section>
 </html>

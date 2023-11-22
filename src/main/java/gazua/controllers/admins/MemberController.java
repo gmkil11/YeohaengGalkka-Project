@@ -8,10 +8,13 @@ import gazua.entities.Member;
 import gazua.repositories.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +43,18 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
         return "admin/member/list";
     }
 
+    @PostMapping
+    public String listPost(@RequestParam(name = "submitButton", required = false) String submitButton,@RequestParam String email, Model model){
+        Optional<Member> member = repository.findByEmail(email);
+        model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
+        if ("delete".equals(submitButton)){
+            return "redirect:/admin/member/delete";
+        } else if ("role".equals(submitButton)){
+            return "redirect:/admin/member/role";
+        }
+            return "redirect:/admin/member/list";
+    }
+
     /**
      * 회원 삭제 양식
      * @param model
@@ -48,6 +63,27 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
     @GetMapping("/delete")
     public String delete(Model model) {
         commonProcess("delete", model);
+        return "admin/member/delete";
+    }
+
+    @PostMapping("/delete")
+    @Transactional
+    public String deletePost(@RequestParam(name = "email", required = false) String email, @RequestParam(name = "submitButton", required = false) String submitButton, Model model, HttpSession session) {
+        commonProcess("delete", model);
+        if("search".equals(submitButton)) {
+            Optional<Member> member = repository.findByEmail(email);
+            model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
+            session.setAttribute("deleteMember", member.get());
+            System.out.println("검색 버튼!");
+        }
+        if("delete".equals(submitButton)) {
+            System.out.println("삭제 버튼!");
+            Member member = (Member) session.getAttribute("deleteMember");
+            System.out.println(member);
+            repository.delete(member);
+            session.removeAttribute("deleteMember");
+        }
+
         return "admin/member/delete";
     }
 
@@ -63,7 +99,7 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
     }
 
     @PostMapping("/role")
-    public String role_change(@RequestParam String email, Model model) {
+    public String rolePost(@RequestParam String email, Model model) {
         commonProcess("role", model);
         Optional<Member> member = repository.findByEmail(email);
         model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
