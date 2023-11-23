@@ -57,6 +57,7 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .btns { display: flex; width: 400px; margin: 0 auto; }
 .btns > button { width: 0; flex-grow: 1; height: 50px; font-size: 18px; border: 1px solid #1D9D65; color: #1D9D65; }
 .btns > button:last-of-type { background: #1DC078; color: #fff; }
+td > .btns {border: #1D9D65 solid 1px; border-radius: 5px; width: 100%; text-align: center; display: inline-block; margin-bottom: 5px}
 
 .search_btn { text-align: center; margin: 20px 0 35px; }
 .search_btn button { text-align: center; height: 45px; line-height: 45px; background: #36466d; color: #fff; padding: 0 30px; border: 0; font-size: 16px; }
@@ -74,8 +75,8 @@ h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
 
 /** 기본 테이블 스타일 */
 .table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
-.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
-.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: center; }
+.table-cols td { background: #fff; padding: 10px 20px; text-align: center}
 .table-cols th,
 .table-cols td { border-bottom: 1px solid #d5d5d5; }
 

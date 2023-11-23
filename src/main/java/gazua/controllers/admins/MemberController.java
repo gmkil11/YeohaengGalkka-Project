@@ -73,13 +73,12 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
             Optional<Member> member = repository.findByEmail(email);
             model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
             session.setAttribute("deleteMember", member.get());
-            System.out.println("검색 버튼!");
         }
         if("delete".equals(submitButton)) {
-            System.out.println("삭제 버튼!");
             Member member = (Member) session.getAttribute("deleteMember");
             System.out.println(member);
-            repository.delete(member);
+            member.setActive(false);
+            repository.saveAndFlush(member); // 변경 내용을 데이터베이스에 저장
             session.removeAttribute("deleteMember");
         }
 
@@ -113,7 +112,7 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
         String pageTitle = "회원 목록";
 
         if (mode.equals("delete")) {
-            pageTitle = "회원 삭제";
+            pageTitle = "활성화 여부";
         } else if (mode.equals("role")) {
             pageTitle = "회원 권한";
         }
