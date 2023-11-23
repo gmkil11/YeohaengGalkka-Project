@@ -10,16 +10,18 @@
             <tr>
                 <th>이메일</th>
                 <th>이름</th>
+                <th>가입일</th>
                 <!-- 다른 내용 불러올 때 더 추가하기 -->
             </tr>
             </thead>
             <tbody>
             <!-- 반복문을 통해 회원 목록을 표시 -->
-            <tr th:each="member : ${memberList}">
-                <td th:text="${member.email}"></td>
-                <td th:text="${member.userNm}"></td>
+            <tr th:each="member : ${memberList}" th:object="${member}">
+                <td th:text="*{email}"></td>
+                <td th:text="*{userNm}"></td>
+                <td th:text="*{#temporals.format(createdAt, 'dd/MMM/yyyy HH:mm')}"></td>
                 <td>
-                    <button type="submit" name="submitButton" value="delete">삭제</button>
+                    <a th:href="@{/admin/member/delete?email={email}(email=*{email})}" value="delete">삭제</a>
                     <button type="submit" name="submitButton" value="role">권한 수정</button>
                 </td>
                 <!-- 다른 내용 불러올 때 더 추가하기 -->

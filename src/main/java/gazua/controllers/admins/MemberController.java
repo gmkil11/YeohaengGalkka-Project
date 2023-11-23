@@ -29,7 +29,6 @@ import java.util.Optional;
 public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
     private final HttpServletRequest request;
-    private final HttpServletResponse response;
     private final MemberRepository repository;
 
 
