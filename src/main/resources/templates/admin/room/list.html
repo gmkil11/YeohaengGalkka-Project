@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content">
+    <h1>회원 목록</h1>
+    <form method="post" th:action="@{/admin/room}">
+        <table class="table-cols">
+            <thead>
+            <tr>
+                <th>객실 번호</th>
+                <th>숙소 이름</th>
+                <th>객실 이름</th>
+                <th>객실 등록일</th>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 반복문을 통해 회원 목록을 표시 -->
+            <tr th:each="member : ${roomList}" th:object="${room}">
+                <td th:text="*{}"></td>
+                <td th:text="*{}"></td>
+                <td th:text="*{}"></td>
+                <td>
+                    <span th:if="${}">활성화</span>
+                    <span th:unless="${}">비활성화</span>
+                </td>
+
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+</section>
+</html>
