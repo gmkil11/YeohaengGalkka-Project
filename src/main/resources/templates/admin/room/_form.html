@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<<<<<<< HEAD
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">>
+<th:block th:fragment="common">
+    <aside th:fragment="menu">
+
+    </aside>
+</th:block>
+=======
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="common">
+        <div th:if="${menuCode == 'room' and subMenuCode == 'add'}">
+
+        </div>
+    </th:block>
+>>>>>>> 1a4b7925f73eec7fefecb537a3aa91f3a4936b28
+</html>
