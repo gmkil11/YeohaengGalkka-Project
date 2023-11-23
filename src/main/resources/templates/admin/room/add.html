@@ -3,32 +3,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
-    <h1>객실 등록</h1>
+    <h1 th:text="${pageTitle}"></h1>
+
+    <form method="post" th:action="@{admin/room/save}" autocomplete="off">
+        <input type="hidden" name="mode" value="add">
+
         <th:block th:replace="~{admin/room/_form::common}"></th:block>
-        <h2>객실 등록</h2>
 
-        <form th:action="@{/admin/room/add}" method="post" th:object="${room}" class="form">
-            <label for="roomNumber">숙소 등록번호:</label>
-            <input type="text" id="roomNumber" name="roomNumber" th:field="*{room_No}" required/>
-
-            <label for="roomName">숙소 이름:</label>
-            <input type="text" id="roomName" name="roomName" th:field="*{room_Name}" required/>
-
-            <label for="roomPrice">숙소 가격:</label>
-            <input type="text" id="roomPrice" name="roomPrice" th:field="*{room_Price}" required/>
-
-            <label for="roomCount">이용 가능 인원:</label>
-            <input type="text" id="roomCount" name="roomCount" th:field="*{room_Count}" required/>
-
-            <label for="checkIn">체크인 시간:</label>
-            <input type="text" id="checkIn" name="checkIn" th:field="*{checkIn}" required/>
-
-            <label for="checkOut">체크인 시간:</label>
-            <input type="text" id="checkOut" name="checkOut" th:field="*{checkOut}" required/>
-            <!-- 추가 필드들 -->
-            <!-- 위치 상세 등등 추가 예정 -->
-
-            <button type="submit">등록</button>
-        </form>
+        <div class="btns">
+            <button type="reset">다시 하기</button>
+            <button type="submit">등록!</button>
+        </div>
+    </form>
 </section>
 </html>

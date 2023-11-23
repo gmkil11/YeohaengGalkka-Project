@@ -25,11 +25,15 @@ public class QRoom extends EntityPathBase<Room> {
 
     public final StringPath roomCount = createString("roomCount");
 
+    public final StringPath roomInfo = createString("roomInfo");
+
     public final StringPath roomName = createString("roomName");
 
-    public final NumberPath<Long> roomNo = createNumber("roomNo", Long.class);
+    public final NumberPath<Long> roomNum = createNumber("roomNum", Long.class);
 
-    public final StringPath roomPrice = createString("roomPrice");
+    public final StringPath roomPr = createString("roomPr");
+
+    public final StringPath sellerId = createString("sellerId");
 
     public QRoom(String variable) {
         super(Room.class, forVariable(variable));

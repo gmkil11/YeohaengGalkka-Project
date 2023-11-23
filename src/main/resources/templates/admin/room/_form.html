@@ -1,19 +1,70 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/layouts/main}">>
+      layout:decorate="~{admin/layouts/main}">
 <th:block th:fragment="common">
     <aside th:fragment="menu">
 
     </aside>
-</th:block>
-=======
-<html xmlns:th="http://www.thymeleaf.org">
-    <th:block th:fragment="common">
+    <table class="table-cols">
+        <tr>
+            <th>객실 번호</th>
+            <td>
+                <input type="text" name="roomNum" th:field="*{roomNum}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>사업자 이메일</th>
+            <td>
+                <input type="text" name="sellerId" th:field="*{sellerId}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>최대 수용 인원수</th>
+            <td>
+                <input type="text" name="roomCount" th:field="*{roomCount}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 이름</th>
+            <td>
+                <input type="text" name="roomNm" th:field="*{roomNm}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 가격</th>
+            <td>
+                <input type="text" name="roomPr" th:field="*{roomPr}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 체크인 시간</th>
+            <td>
+                <input type="text" name="checkIn" th:field="*{checkIn}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 체크아웃 시간</th>
+            <td>
+                <input type="text" name="checkOut" th:field="*{checkOut}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 정보</th>
+            <td>
+                <input type="text" name="roomInfo" th:field="*{roomInfo}">
+
+            </td>
+        </tr>
         <div th:if="${menuCode == 'room' and subMenuCode == 'add'}">
 
         </div>
-    </th:block>
->>>>>>> 1a4b7925f73eec7fefecb537a3aa91f3a4936b28
+</th:block>
 </html>
