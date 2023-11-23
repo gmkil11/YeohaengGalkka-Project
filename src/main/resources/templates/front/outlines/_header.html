@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<header th:fragment="common" >
+  <div class="header_logo_search">
+    <div class="logo">
+      <img th:src="@{/img/logo.svg}" alt="logo">
+      <img th:src="@{/img/logo2.svg}" alt="logo2">
+    </div>
+    <form METHOD="post" class="search_bar_box">
+      <input type="text" class="search_bar" placeholder="어디로 갈까요?">
+      <BUTTON TYPE="submit" class="search_button" onclick="location.href='#'"></BUTTON>
+    </form>
+  </div>
+  <div class="header_buttons">
+    <BUTTON TYPE="button" class="join_button" onclick="location.href='/day05/member/join'">회원가입</BUTTON>
+    <button type="button" class="login_button">로그인</button>
+  </div>
+</header>
+</html>

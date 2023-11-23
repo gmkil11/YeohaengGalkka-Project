@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1.0,maximum-scale=3.0, minimum-scale=1.0">
+    <meta name="description" th:content="${@siteConf.get('siteDescription')}">
+    <title>
+        <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' ::'}"></th:block>
+        <th:block th:text="${@siteConf.get('siteTitle')}"></th:block>
+    </title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
+    <link rel="stylesheet" type="text/css" th:each="file : ${addCommonCss}"
+          th:href="@{/common/css/{file}.css?v={v}(file=${file},v=${@siteConf.get('cssJsVersion')})}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/mobile/css/style.css?v={v}(v=${@siteConf.get('cssJsVersion')})}">
+    <link rel="stylesheet" type="text/css" th:each="file : ${addCss}"
+          th:href="@{/mobile/css/{file}.css?v={v}(file=${file}, v=${@siteConf.get('cssJsVersion')})}">
+
+    <th:block layout:fragment="addCss"></th:block>
+
+    <script th:src="@{/common/js/common.js}"></script>
+    <script th:each="file : ${addCommonScript}" th:src="@{/common/js/{file}.js?v={v}(file=${file}, v=${@siteConf.get('cssJsVersion')})}"></script>
+
+    <script th:src="@{/mobile/js/common.js}"></script>
+    <script th:each="file : ${addScript}" th:src="@{/mobile/js/{file}.js?v={v}(file=${file},v=${@siteConf.get('cssJsVersion')})}"></script>
+
+    <th:block layout:fragment="addScript"></th:block>
+
+</head>
+<body>
+<header th:replace="~{mobile/outlines/header::common}"></header>
+<main layout:fragment="content"></main>
+<footer th:replace="~{mobile/outlines/footer::common}"></footer>
+<iframe name="ifrmProcess" class="dn"></iframe>
+</body>
+</html>
