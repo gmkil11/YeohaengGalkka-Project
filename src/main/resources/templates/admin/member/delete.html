@@ -3,9 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
-    <h1>회원 삭제</h1>
+    <h1>활성화 여부</h1>
     <form method="post" th:action="@{/admin/member/delete}">
-        <p>삭제할 계정을 검색해주세요</p>
+        <p>활성화 여부 설정을 할 계정을 검색해주세요</p>
         <input type="text" placeholder="이메일을 입력해주세요" name="email" th:value="${param.email}">
 
         <button type="submit" name="submitButton" value="search">검색</button>
