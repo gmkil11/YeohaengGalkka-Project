@@ -35,6 +35,8 @@ public class RoomController implements CommonProcess, ScriptExceptionProcess {
     @GetMapping
     public String list(Model model) {
         commonProcess("list", model);
+        List<Room> roomList = repository.findAll();
+        model.addAttribute("roomList", roomList);
         return "admin/room/list";
     }
 
@@ -60,7 +62,7 @@ public class RoomController implements CommonProcess, ScriptExceptionProcess {
     public String activeRoom(Model model) {
         commonProcess("active", model);
         // 테스트용 객실 등록 시작
-        Room room = Room.builder()
+        Room room1 = Room.builder()
                 .roomNum(1L)
                 .sellerId("user01@test.org")
                 .roomName("숙소명1")
@@ -69,10 +71,24 @@ public class RoomController implements CommonProcess, ScriptExceptionProcess {
                 .checkIn(LocalDateTime.now())
                 .checkOut(LocalDateTime.now().plusDays(1))
                 .active(true)
-                .roomInfo("객실 정보")
+                .roomInfo("객실 정보1")
                 .build();
 
-        repository.saveAndFlush(room);
+        repository.saveAndFlush(room1);
+
+        Room room2 = Room.builder()
+                .roomNum(2L)
+                .sellerId("user02@test.org")
+                .roomName("숙소명2")
+                .roomCount("10")
+                .roomPr("50000")
+                .checkIn(LocalDateTime.now().plusDays(2))
+                .checkOut(LocalDateTime.now().plusDays(5))
+                .active(true)
+                .roomInfo("객실 정보2")
+                .build();
+
+        repository.saveAndFlush(room2);
         // 테스트용 개실 등록 끝
 
         return "admin/room/active";

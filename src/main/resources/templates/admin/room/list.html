@@ -10,20 +10,22 @@
             <tr>
                 <th>객실 번호</th>
                 <th>숙소 이름</th>
-                <th>객실 이름</th>
-                <th>객실 등록일</th>
+                <th>이용 가능 인원</th>
+                <th>객실 가격</th>
+                <th>객실 활성화 여부</th>
                 <!-- 다른 내용 불러올 때 더 추가하기 -->
             </tr>
             </thead>
             <tbody>
             <!-- 반복문을 통해 회원 목록을 표시 -->
-            <tr th:each="member : ${roomList}" th:object="${room}">
-                <td th:text="*{}"></td>
-                <td th:text="*{}"></td>
-                <td th:text="*{}"></td>
+            <tr th:each="room : ${roomList}" th:object="${room}">
+                <td th:text="*{roomNum}"></td>
+                <td th:text="*{roomName}"></td>
+                <td th:text="*{roomCount}"></td>
+                <td th:text="*{roomPr}"></td>
                 <td>
-                    <span th:if="${}">활성화</span>
-                    <span th:unless="${}">비활성화</span>
+                    <span th:if="*{active}">활성화</span>
+                    <span th:unless="*{active}">비활성화</span>
                 </td>
 
                 <!-- 다른 내용 불러올 때 더 추가하기 -->
