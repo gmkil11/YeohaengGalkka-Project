@@ -1,0 +1,26 @@
+.ui-datepicker {
+    /* datepicker 전체에 대한 스타일 */
+    font-family: Arial, sans-serif;
+}
+
+.ui-datepicker-header {
+    /* 달력의 헤더에 대한 스타일 */
+    background-color: #1DC078;
+    color: #fff;
+}
+
+.ui-datepicker-calendar a {
+    /* 날짜에 대한 스타일 */
+    color: #000;
+}
+
+.ui-datepicker-calendar .ui-state-active a {
+    /* 선택된 날짜에 대한 스타일 */
+    background-color: #1DC078;
+    color: #fff;
+}
+
+.ui-datepicker-title {
+    /* 툴팁에 대한 스타일 */
+    font-weight: bold;
+}

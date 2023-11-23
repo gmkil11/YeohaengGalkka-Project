@@ -2,11 +2,15 @@ server:
   port: 3000
 
 spring:
+  # 프로필 설정
+  profiles:
+    active: dev
+
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XE
-    username: GAZUA
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: PROJECT
     password: _aA123456
 
   # JPA 설정
@@ -20,7 +24,7 @@ spring:
         use_sql_comments: true
         dialect: org.hibernate.dialect.OracleDialect
     hibernate:
-      ddlAuto: validate
+      ddlAuto: update
 
   # 파일 업로드 설정
   servlet:
@@ -29,26 +33,17 @@ spring:
       maxRequestSize: 40MB
 
   # 정적 자원 설정(CSS, JS, 이미지)
-  web:
-    resources:
-      staticLocations: file:src/main/resources/static/
-
-  # 라이브 리로드 설정
-  devtools:
-    livereload:
-      enabled: true
+  resources:
+    staticLocations: file:src/main/resources/static/
 
   # 타임리프 설정
   thymeleaf:
-    cache: false
-    prefix: file:src/main/resources/templates/
-
-  flyway:
-    enabled: true
+    cache: true
+    prefix: classpath:/templates/
 
 file:
   upload:
-    path: C:/uploads/
+    path: /home/team/uploads/
     url: /uploads/
 
 # 로거 설정
