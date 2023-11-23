@@ -6,8 +6,10 @@ spring:
     password:
 
   jpa:
+    open-in-view: true
     properties:
       hibernate:
+        globally_quoted_identifiers: true
         # 실행되는 쿼리 콘솔 출력
         show_sql: true
         # 콘솔 창에 출력되는 쿼리를 가독성 좋게 포맷팅

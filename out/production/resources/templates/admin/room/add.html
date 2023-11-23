@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content" th:object="${RoomConfigForm}">
+    <div class="errors" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+    <h1 th:text="${pageTitle}"></h1>
+
+    <form name="frmSave" method="post" th:action="@{/admin/room/save}" autocomplete="off">
+        <input type="hidden" name="mode" value="add">
+
+        <table class="table-cols">
+            <tr>
+                <th>객실 번호</th>
+                <td>
+                    <input type="text" name="roomNo" th:field="*{roomNo}">
+                    <div class="errors" th:each="err : ${#fields.errors('roomNo')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>사업자 이메일</th>
+                <td>
+                    <input type="text" name="sellerId" th:field="*{sellerId}">
+                    <div class="errors" th:each="err : ${#fields.errors('sellerId')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>최대 수용 인원수</th>
+                <td>
+                    <input type="text" name="roomCount" th:field="*{roomCount}">
+                    <div class="errors" th:each="err : ${#fields.errors('roomCount')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>객실 이름</th>
+                <td>
+                    <input type="text" name="roomNm" th:field="*{roomNm}">
+                    <div class="errors" th:each="err : ${#fields.errors('roomNm')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>객실 가격</th>
+                <td>
+                    <input type="text" name="roomPr" th:field="*{roomPr}">
+                    <div class="errors" th:each="err : ${#fields.errors('roomPr')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>객실 체크인 시간</th>
+                <td>
+                    <input type="text" name="checkIn" th:field="*{checkIn}">
+                    <div class="errors" th:each="err : ${#fields.errors('checkIn')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>객실 체크아웃 시간</th>
+                <td>
+                    <input type="text" name="checkOut" th:field="*{checkOut}">
+                    <div class="errors" th:each="err : ${#fields.errors('checkOut')}" th:text="${err}"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>객실 정보</th>
+                <td>
+                    <input type="text" name="roomInfo" th:field="*{roomInfo}">
+                    <div class="errors" th:each="err : ${#fields.errors('roomInfo')}" th:text="${err}"></div>
+                </td>
+            </tr>
+        </table>
+            <button type="submit">등록</button>
+
+        </form>
+</section>
+</html>
