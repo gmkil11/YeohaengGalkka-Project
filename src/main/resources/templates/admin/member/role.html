@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content">
+    <h1>회원 권한</h1>
+    <form method="post" th:action="@{/admin/member/role}">
+        <p>권한을 변경할 계정을 검색해주세요</p>
+        <input type="text" placeholder="이메일을 입력해주세요" name="email">
+        <button type="submit">검색</button>
+    </form>
+    <th:block th:if="${member}">
+        <form method="post" th:action="@{/admin/member/role}">
+        <table>
+            <thead>
+            <tr>
+                <th>이메일</th>
+                <th>유저명</th>
+                <th>현재 권한</th>
+                <th>권환</th>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 반복문을 통해 회원 목록을 표시 -->
+            <tr>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.userNm}"></td>
+                <td th:text="${member.mtype}"></td>
+                <td>
+                    <select name="mtype">
+                        <option value="USER">일반 회원</option>
+                        <option value="ADMIN">관리자</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="submit">수정</button>
+                </td>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </tbody>
+        </table>
+        </form>
+    </th:block>
+</section>
+</html>
