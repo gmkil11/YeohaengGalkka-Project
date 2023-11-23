@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mobile/layouts/main}">
+
+<main layout:fragment="content">
+    <form method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
+        <div class="rows">
+            <input type="text" name="email" th:placeholder="#{이메일}" th:field="*{email}">
+            <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+        </div>
+        <div class="rows">
+            <input type="password" name="password" th:placeholder="#{비밀번호}" th:field="*{password}">
+            <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+        </div>
+        <div class="rows">
+            <input type="password" name="confirmPassword" th:placeholder="#{비밀번호_확인}" th:field="*{confirmPassword}">
+            <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+        </div>
+
+        <div class="rows">
+            <input type="text" name="userNm" th:placeholder="#{회원명}" th:field="*{userNm}">
+            <div class="error" th:each="err : ${#fields.errors('userNm')}" th:text="${err}"></div>
+        </div>
+
+        <div class="rows">
+            <input type="text" name="mobile" th:placeholder="#{휴대전화번호}" th:field="*{mobile}">
+            <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
+        </div>
+
+        <div class="rows">
+            <pre class="terms" th:text="${@siteConf.get('joinTerms')}"></pre>
+            <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
+            <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
+        </div>
+
+        <button type="submit" th:text="#{회원가입}"></button>
+
+    </form>
+</main>
+
+</html>
