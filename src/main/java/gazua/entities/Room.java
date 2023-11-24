@@ -16,11 +16,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Room {
 
+    @Id @GeneratedValue
     private Long roomNum; // 숙소 번호
 
     private String sellerId;
 
-    @Id @GeneratedValue
     @Column(length = 65, nullable = false)
     private String roomName;   // 숙소 이름
 
@@ -37,4 +37,6 @@ public class Room {
     private LocalDateTime checkOut; // 체크아웃 시간
 
     private String roomInfo;
+
+
 }

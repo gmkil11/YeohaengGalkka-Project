@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,6 +64,16 @@ public class RoomController implements CommonProcess, ScriptExceptionProcess {
         mode = Objects.requireNonNullElse(mode,"list");
         if(mode.equals("add")) pageTitle = "숙소 등록";
 
+        List<String> addCommonScript = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+
+        if (mode.equals("add") || mode.equals("edit")) {
+            addCommonScript.add("fileManager");
+            addScript.add("room/form");
+        }
+
+        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addScript", addScript);
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("menuCode","room");
         model.addAttribute("submenus", Menu.gets("room")); // 하위 메뉴

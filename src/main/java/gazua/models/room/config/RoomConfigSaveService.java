@@ -31,7 +31,7 @@ public class RoomConfigSaveService {
         room.setRoomCount(form.getRoomCount());
         room.setRoomPr(form.getRoomPr());
         room.setCheckIn(form.getCheckIn());
-        room.setCheckOut(form.getCheckOut());
+       // room.setCheckOut(form.getCheckOut());
         room.setRoomInfo(form.getRoomInfo());
     }
 }

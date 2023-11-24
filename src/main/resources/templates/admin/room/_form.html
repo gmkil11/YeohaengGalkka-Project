@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
-<th:block th:fragment="common">
-    <aside th:fragment="menu">
+<th:block th:fragment="common" th:object="${roomConfigForm}">
+    <input type="hidden" name="gid" th:field="*{gid}">
+    <aside th:fragment="menu" >
 
     </aside>
-    <table class="table-cols">
+    <table class="table-cols" >
         <tr>
             <th>객실 번호</th>
             <td>
@@ -31,7 +32,14 @@
         <tr>
             <th>객실 이름</th>
             <td>
-                <input type="text" name="roomNm" th:field="*{roomNm}">
+                <input type="text" name="roomNm" th:field="*{roomName}">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 설명1</th>
+            <td>
+                <input type="text" name="roomInfo" th:field="*{roomInfo}" placeholder="객실명 아래 들어갈 문구입니다.">
 
             </td>
         </tr>
@@ -43,28 +51,51 @@
             </td>
         </tr>
         <tr>
-            <th>객실 체크인 시간</th>
+            <th>객실 설명2</th>
+            <td>
+                <input type="text" name="roomInfo" th:field="*{roomInfo}" placeholder="결제 박스 안에 들어갈 문구입니다.">
+
+            </td>
+        </tr>
+        <tr>
+            <th>객실 이용 시작 시간</th>
             <td>
                 <input type="text" name="checkIn" th:field="*{checkIn}">
 
             </td>
         </tr>
         <tr>
-            <th>객실 체크아웃 시간</th>
+            <th>객실 설명3</th>
             <td>
-                <input type="text" name="checkOut" th:field="*{checkOut}">
+                <input type="text"  name="roomInfo" th:field="*{roomInfo}" placeholder="본문에 들어갈 문구입니다.">
 
             </td>
         </tr>
         <tr>
-            <th>객실 정보</th>
+            <th>메인 이미지</th>
             <td>
-                <input type="text" name="roomInfo" th:field="*{roomInfo}">
-
+                <button type="button" class="sbtn upload_files" data-location="main">이미지 업로드</button>
+                <div id="main_images"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>목록 이미지</th>
+            <td>
+                <button type="button" class="sbtn upload_files" data-location="list">이미지 업로드</button>
+                <div id="list_images"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>상세 이미지</th>
+            <td>
+                <button type="button" class="sbtn upload_files" data-location="desc">이미지 업로드</button>
+                <div id="desc_images"></div>
             </td>
         </tr>
         <div th:if="${menuCode == 'room' and subMenuCode == 'add'}">
 
         </div>
+    </table>
+    <script th:replace="~{common/_file_tpl::tpl_image1}"></script>
 </th:block>
 </html>

@@ -6,13 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.cglib.core.Local;
+import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class RoomConfigForm {
     private String mode;
+
+    private String gid = UUID.randomUUID().toString();
 
     private Long roomNum;        // 객실 번호
 
@@ -25,11 +29,12 @@ public class RoomConfigForm {
     @NotBlank(message = "숙소 이름을 입력하세요.")
     private String roomName;      // 숙소 이름
 
+
     private String roomPr;      // 숙소 가격
 
-    private LocalDateTime checkIn;      // 체크인 시간
 
-    private LocalDateTime checkOut;     // 체크아웃 시간
+    private LocalDateTime checkIn;  // 이용 시작 시간
+
 
     private String roomInfo;
 }
