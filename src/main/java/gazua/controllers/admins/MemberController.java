@@ -2,6 +2,7 @@ package gazua.controllers.admins;
 
 import gazua.commons.CommonProcess;
 import gazua.commons.ScriptExceptionProcess;
+import gazua.commons.constants.MemberType;
 import gazua.commons.menus.Menu;
 import gazua.commons.menus.MenuDetail;
 import gazua.entities.Member;
@@ -97,10 +98,24 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
     }
 
     @PostMapping("/role")
-    public String rolePost(@RequestParam String email, Model model) {
+    public String rolePost(@RequestParam(name = "email", required = false)String email,
+                           @RequestParam(name = "submitButton", required = false) String submitButton,
+                           @RequestParam(name = "mtype", required = false) String mtype,
+                           Model model, HttpSession session) {
         commonProcess("role", model);
-        Optional<Member> member = repository.findByEmail(email);
-        model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
+        if("search".equals(submitButton)) {
+            Optional<Member> member = repository.findByEmail(email);
+            model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
+            session.setAttribute("editMember", member.get());
+        }
+        if("delete".equals(submitButton)) {
+            Member member = (Member) session.getAttribute("editMember");
+            if(mtype.equals("USER")) {member.setMtype(MemberType.USER);}
+            else if(mtype.equals("ADMIN")) {member.setMtype(MemberType.ADMIN);}
+
+            repository.saveAndFlush(member); // 변경 내용을 데이터베이스에 저장
+            session.removeAttribute("editMember");
+        }
 
         return "admin/member/role";
     }

@@ -12,6 +12,7 @@
                 <th>이름</th>
                 <th>가입일</th>
                 <th>활성화 여부</th>
+                <th>권한</th>
                 <th>설정</th>
                 <!-- 다른 내용 불러올 때 더 추가하기 -->
             </tr>
@@ -25,6 +26,10 @@
                 <td>
                     <span th:if="${member.active}">활성화</span>
                     <span th:unless="${member.active}">비활성화</span>
+                </td>
+                <td>
+                    <span th:if="${member.mtype eq member.mtype.USER}">일반회원</span>
+                    <span th:if="${member.mtype eq member.mtype.ADMIN}">어드민</span>
                 </td>
                 <td>
                     <a th:href="@{/admin/member/delete?email={email}(email=*{email})}" value="delete" class="btns">활성화 여부</a>
