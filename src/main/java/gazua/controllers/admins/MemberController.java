@@ -5,12 +5,15 @@ import gazua.commons.ScriptExceptionProcess;
 import gazua.commons.constants.MemberType;
 import gazua.commons.menus.Menu;
 import gazua.commons.menus.MenuDetail;
+import gazua.controllers.admins.dtos.MemberAdminForm;
 import gazua.entities.Member;
+import gazua.models.member.MemberUpdateService;
 import gazua.repositories.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import oracle.jdbc.proxy.annotation.Post;
 import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +35,7 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
     private final HttpServletRequest request;
     private final MemberRepository repository;
 
-
+    private final MemberUpdateService updateService;
 
     @GetMapping
     public String list(Model model) {
@@ -41,6 +44,17 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
         model.addAttribute("memberList", memberList);
 
         return "admin/member/list";
+    }
+
+    @PostMapping("/update")
+    public String listPs(MemberAdminForm form, Model model) {
+
+        updateService.updates(form);
+
+        // 수정 성공시에는 새로고침
+        model.addAttribute("script", "parent.location.reload()");
+
+        return "common/_execute_script";
     }
 
     @PostMapping
@@ -133,6 +147,10 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
         }
 
         CommonProcess.super.commonProcess(model, pageTitle);
+
+        if (mode.equals("list")) {
+            model.addAttribute("memberTypes", MemberType.getList());
+        }
 
         model.addAttribute("menuCode", "member");
 
