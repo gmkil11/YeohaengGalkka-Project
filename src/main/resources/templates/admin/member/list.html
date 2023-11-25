@@ -31,7 +31,7 @@
                 </td>
                 <td th:text="*{email}"></td>
                 <td th:text="*{userNm}"></td>
-                <td th:text="*{#temporals.format(createdAt, 'dd/MMM/yyyy HH:mm')}"></td>
+                <td th:text="*{#temporals.format(createdAt, 'yyyy년/MM월/dd일 HH:mm')}"></td>
                 <td nowrap>
                     <input type="radio" th:name="*{'active_' + userNo}" value="true" th:id="*{'active_' + userNo + '_true'}" th:checked="*{active}">
                     <label th:for="*{'active_' + userNo + '_true'}">활성화</label>
@@ -47,6 +47,7 @@
             </tr>
             </tbody>
         </table>
+        <th:block th:if="${memberList == null or memberList.isEmpty()}">가입되어 있는 회원이 없습니다!</th:block>
         <div class="table-action">
             <button type="submit" class="sbtn">선택회원 수정하기</button>
         </div>
