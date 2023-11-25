@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{front/layouts/main}">
+    layout:decorate="~{front/layouts/joinLogin}">
 
-<main layout:fragment="content">
+<main layout:fragment="content" class="login-style">
+    <div class="LogoBox">
+        <img th:src="@{/img/logo.svg}" alt="logo">
+        <img th:src="@{/img/logo2.svg}" alt="logo">
+    </div>
     <form method="post" th:action="@{/member/login}" autocomplete="off">
         <input th:if="${redirectURL != null}" type="hidden" name="redirectURL" th:value="${redirectURL}">
         <div class="rows">

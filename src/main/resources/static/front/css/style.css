@@ -95,6 +95,17 @@ header {
 
 /*헤더 네비게이션 바 시작 */
 
+/* 로그인 시작 */
+.login-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 69px;
+}
+/* 로그인 끝 */
+
+
 /*푸터 영역 시작*/
 footer{
     display: flex;
