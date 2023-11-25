@@ -1,28 +1,15 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 
-* {
-    box-sizing: border-box;
+* { box-sizing: border-box; }
 
-}
+body{ margin: 0; font-family: Pretendard, serif; }
 
-body{
-    margin: 0;
-    font-family: Pretendard, serif;
-
-}
-
-main {
-    height: 100%;
-}
+main { height: 100%; }
 
 
-.dn{
-    display: none;
-}
+.dn{ display: none; }
 
-.error{
-    color: darkred;
-}
+.error{ color: darkred; }
 
 /*헤더 네비게이션 바 시작 */
 header {
@@ -34,16 +21,9 @@ header {
     border-bottom: 1px #DFDFDF solid;
 }
 
-.header_logo_search{
-    display: flex;
-    align-items: center;
-    gap: 48px;
-}
+.header_logo_search{ display: flex; align-items: center; gap: 48px; }
 
-.search_bar_box{
-    display: flex;
-
-}
+.search_bar_box{ display: flex; }
 
 .search_bar{
     display: flex;
@@ -61,9 +41,7 @@ header {
     letter-spacing: -0.24px;
 }
 
-.search_bar:focus{
-    outline: none;
-}
+.search_bar:focus{ outline: none; }
 
 .search_button{
     background: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Icon/Search'%3E%3Cpath id='Vector' d='M20.4 20.975L13.825 14.4C13.325 14.8333 12.742 15.1708 12.076 15.4125C11.41 15.6542 10.7014 15.775 9.95 15.775C8.1473 15.775 6.62163 15.15 5.37298 13.9C4.12433 12.65 3.5 11.1417 3.5 9.375C3.5 7.60833 4.125 6.1 5.375 4.85C6.625 3.6 8.1375 2.975 9.9125 2.975C11.6875 2.975 13.1958 3.6 14.4375 4.85C15.6792 6.1 16.3 7.60958 16.3 9.37875C16.3 10.0929 16.1833 10.7833 15.95 11.45C15.7167 12.1167 15.3667 12.7417 14.9 13.325L21.5 19.875L20.4 20.975ZM9.925 14.275C11.2792 14.275 12.4302 13.7958 13.3781 12.8375C14.326 11.8792 14.8 10.725 14.8 9.375C14.8 8.025 14.326 6.87083 13.3781 5.9125C12.4302 4.95417 11.2792 4.475 9.925 4.475C8.55695 4.475 7.3941 4.95417 6.43645 5.9125C5.47882 6.87083 5 8.025 5 9.375C5 10.725 5.47882 11.8792 6.43645 12.8375C7.3941 13.7958 8.55695 14.275 9.925 14.275Z' fill='black'/%3E%3C/g%3E%3C/svg%3E%0A") no-repeat center center;
@@ -74,11 +52,7 @@ header {
     width: 15%;
 }
 
-.header_buttons{
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-}
+.header_buttons{ display: flex; align-items: flex-start; gap: 16px; }
 
 .join_button{
     display: flex;
@@ -98,9 +72,7 @@ header {
     transition: all 0.5s;
 }
 
-.join_button:hover{
-    background: #D8FFEE;
-}
+.join_button:hover{ background: #D8FFEE; }
 
 .login_button{
     display: flex;
@@ -119,9 +91,7 @@ header {
     background: #1DC078;
     transition: all 0.5s;
 }
-.login_button:hover{
-    background: #1D9D65;
-}
+.login_button:hover{ background: #1D9D65; }
 
 /*헤더 네비게이션 바 시작 */
 
@@ -135,10 +105,7 @@ footer{
     gap: 30px;
 }
 
-.title-hr{
-    width: 80vw;
-    margin: 5vh 10vw;
-}
+.title-hr{ width: 80vw; margin: 5vh 10vw; }
 
 p {
     color: #787878;
@@ -150,91 +117,122 @@ p {
     text-align: center;
 }
 
-.footer-hr{
-    width: 82vw;
-    margin: 3vh 0;
-}
+.footer-hr{ width: 82vw; margin: 3vh 0; }
 /*푸터 영역 끝*/
 
-/* 객실 상세보기 시작*/
+/* 메인 페이지 시작*/
 
-/* 스위퍼 시작 */
-.swiper-box{
-    width: 80vw;
-    margin: 20px auto auto;
+.main-style { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+.main-style > * {
+    margin-bottom: 100px;
 }
 
-.swiper {
-    width: 100%;
-    height: 100%;
-    margin-top: 10px;
-}
+.banner { height: 400px; width: 100%; position: relative}
 
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
+.banner img { width: 100%; height: 100%}
+
+.banner_btn {
     display: flex;
+    position: absolute;
+    right: 70px;
+    bottom: 50px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.15);
+    width: 152px;
+    height: 50px;
+    align-items: center;
     justify-content: center;
+    gap: 25px;
+    color: #000;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: -0.24px;
+}
+
+.banner_btn img{ width: 10px; height: 20px; }
+
+.category-box{ display: inline-flex; align-items: flex-start; gap: 80px; }
+
+.category { display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer
+}
+
+.category img { width: 45px; height: 40px; }
+
+.card-top-exp {display: flex; width: 100%; justify-content: space-between; margin-bottom: 0;}
+
+.card-top-exp div {
+    margin-left: 100px;
+}
+
+.card-top-exp div {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.48px;
+}
+
+.card-top-exp > div span:first-of-type {
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.48px;
+}
+
+.card-top-exp a{
+    display: flex;
+    margin-right: 60px;
+    color: #787878;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
     align-items: center;
 }
 
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    cursor: pointer;
 }
 
-
-
-.swiper {
-    width: 100%;
-    height: 60vh;
-    margin-left: auto;
-    margin-right: auto;
+.card > div span:first-of-type {
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
 }
 
-.swiper-slide {
-    background-size: cover;
-    background-position: center;
+.card > div {
+    display: flex;
+    flex-direction: column;
+    color: #787878;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.24px;
+    gap: 8px;
 }
 
-.mySwiper2 {
-    width: 100%;
+.card > span {
+    color: #1DC078;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.36px;
 }
 
-.mySwiper {
-    height: 20%;
-    box-sizing: border-box;
-    padding: 10px 0 30px;
-}
+/* 메인 페이지 끝*/
 
-.mySwiper .swiper-slide {
-    width: 25%;
-    height: 20vh;
-    opacity: 0.4;
-}
 
-.mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-}
-
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+/* 객실 상세보기 시작*/
 
 
 
-/* 스위퍼 끝 */
 /*객실 설명*/
-
-
-
-
 .room-exp{
     display: flex;
     flex-direction:column;
@@ -283,10 +281,7 @@ p {
     z-index: 200;
 }
 
-.pay-box-price{
-    display: flex;
-    align-items: center;
-}
+.pay-box-price{ display: flex; align-items: center; }
 
 .pay-box-price h1{
     color: #000;
@@ -310,32 +305,16 @@ p {
     vertical-align: middle;
 }
 
-.pay-box-select {
-    width: 314px;
-    flex-shrink: 0;
-    border: 0.5px solid #787878;
-    margin: 20px 13px 19px 13px ;
-}
+.pay-box-select { width: 314px; flex-shrink: 0; border: 0.5px solid #787878; margin: 20px 13px 19px 13px ; }
 
-.select-p-box:first-child {
-    border-bottom: 0.1px solid #787878;
-}
+.select-p-box:first-child { border-bottom: 0.1px solid #787878; }
 
 
-.select-p-box{
-    display: flex;
-    justify-content: space-between;
-}
+.select-p-box{ display: flex; justify-content: space-between; }
 
 
 
-.select-p-box hr{
-    width: 10px;
-    height: 0;
-    color: #787878;
-    margin: 25px 0 0;
-
-}
+.select-p-box hr{ width: 10px; height: 0; color: #787878; margin: 25px 0 0; }
 
 .select-day-box{
     display: flex;
@@ -360,40 +339,19 @@ p {
     text-align: center;
     caret-color: transparent;
 }
-#startDate {
-    width: 78px;
-}
+#startDate { width: 78px; }
 
-#endDate {
-    margin-right: 12px;
-}
+#endDate { margin-right: 12px; }
 
-.mr {
-    margin-right: 22px;
-}
+.mr { margin-right: 22px; }
 
-.pr{
-    margin-right: 1px;
-}
+.pr{ margin-right: 1px; }
 
-.select-p-box select{
-    width: 220px;
-    border: none;
-    text-align: center;
-    appearance: none;
-    outline: none;
-}
+.select-p-box select{ width: 220px; border: none; text-align: center; appearance: none; outline: none; }
 
-.pay-box-info{
-    width: 340px;
-    border-radius: 15px;
-    border: 0.5px solid #787878;
-}
+.pay-box-info{ width: 340px; border-radius: 15px; border: 0.5px solid #787878; }
 
-.pay-box-info .login_button{
-    width: 315px;
-    margin: auto auto 20px;
-}
+.pay-box-info .login_button{ width: 315px; margin: auto auto 20px; }
 
 .select-box-info {
     display: flex;
@@ -408,32 +366,15 @@ p {
     letter-spacing: -0.225px;
     margin: auto auto 20px;
 }
-.room-exp-area {
-    z-index: 0;
-}
-.set-middle{
-    margin-left: 11vw;
-    display: flex;
-    flex-direction: column;
-}
+.room-exp-area { z-index: 0; }
 
-.set-middle img{
-    width: 44vw;
-    margin-bottom: 2vh;
-}
+.set-middle{ margin-left: 11vw; display: flex; flex-direction: column; }
 
-.set-middle p{
-    width: 44vw;
-}
+.set-middle img{ width: 44vw; margin-bottom: 2vh; }
 
-.d-hr{
-    width: 44vw;
-    margin-left: 11vw;
-}
+.set-middle p{ width: 44vw; }
 
-.map {
-    margin: 3vh 0 10vh 11vw;
-}
+.d-hr{ width: 44vw; margin-left: 11vw; }
 
-
+.map { margin: 3vh 0 10vh 11vw; }
 /* 객실 상세보기 끝*/
