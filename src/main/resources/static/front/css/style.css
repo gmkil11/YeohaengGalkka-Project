@@ -1,16 +1,17 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; font-family: Pretendard, serif; }
 
-body{ margin: 0; font-family: Pretendard, serif; }
+body{ margin: 0;  }
 
 main { height: 100%; }
 
 
 .dn{ display: none; }
 
-.error{ color: darkred; }
+.error{ color: darkred; font-size: 0.7rem; }
 
+.error-box{ border: darkred 1px solid; }
 /*헤더 네비게이션 바 시작 */
 header {
     display: flex;
@@ -19,6 +20,10 @@ header {
     justify-content: space-between;
     align-items: flex-start;
     border-bottom: 1px #DFDFDF solid;
+}
+
+.logoBox {
+    cursor: pointer;
 }
 
 .header_logo_search{ display: flex; align-items: center; gap: 48px; }
@@ -72,7 +77,9 @@ header {
     transition: all 0.5s;
 }
 
-.join_button:hover{ background: #D8FFEE; }
+.join_button:hover{
+
+}
 
 .login_button{
     display: flex;
@@ -96,15 +103,179 @@ header {
 /*헤더 네비게이션 바 시작 */
 
 /* 로그인 시작 */
-.login-style {
+
+
+.member-style {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    height: 100vh;
+}
+
+.member-box {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    text-align: left;
+}
+
+.member-box .error {
+    align-items: flex-start;
+    text-align: left;
+}
+
+
+.member-box button {
+    display: flex;
+    height: 48px;
+    padding: 16px 32px;
     justify-content: center;
     align-items: center;
-    gap: 69px;
+    gap: 16px;
+    background-color: #fff;
+    border-radius: 30px;
+    border: 1px solid #1DC078;
+    color: #1DC078;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: -0.24px;
+    transition: all 0.5s;
+    width: 360px;
 }
+
+.member-box button:hover {
+    background: #D8FFEE;
+}
+
+.member-box button:first-of-type {
+    background: #1DC078;
+    color: #fff;
+}
+
+.member-box button:first-of-type:hover {
+    background: #1D9D65;
+}
+
+.rows {
+    display: flex;
+    align-items: center;
+    background: #F5F5F5;
+    border-radius: 30px;
+    width: 360px;
+}
+
+.rows input {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    background: #F5F5F5;
+    border: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: -0.24px;
+    padding: 16px 16px 16px 16px;
+    outline: none;
+}
+.rows input::placeholder {
+    color: #9F9F9F;
+}
+
+.rows img {
+    margin-left: 20px;
+}
+
+
 /* 로그인 끝 */
 
+/* 회원가입 시작 */
+
+/* 회원가입 끝 */
+.agreeBox{
+    display: flex;
+    width: 430px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.agreeBox label {
+    cursor: pointer;
+}
+
+.agreeBox hr {
+    width: 100%;
+    border: solid 0.5px #9F9F9F;
+}
+.agreeAll {
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 200% */
+}
+/* 체크박스 시작 */
+.agree{
+    display: none;
+
+}
+
+.agree + label{
+    cursor: pointer;
+
+}
+
+.agree + label > span{
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+.checkbox-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox {
+    width:17px;
+    height:17px;
+    border:1px solid #000;
+    content:"";
+    display:inline-block;
+    border-radius: 4px;
+    vertical-align:middle;
+    transition: all 0.3s;
+}
+
+.checked {
+    content: "";
+    width: 17px;
+    height: 17px;
+    background-color: #767676;
+    border-color: #000;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url('../../img/icons/check.svg');
+    transition: all 0.3s;
+}
+
+
+.allAgreeText{
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 32px; /* 200% */
+}
+
+.agreeText{
+    font-size: 1.2rem;
+    font-weight: 100;
+    line-height: 32px; /* 200% */
+}
 
 /*푸터 영역 시작*/
 footer{
