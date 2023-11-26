@@ -22,7 +22,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslP
         return exists(QMember.member.email.eq(email));
     }
 
-        static List<Member> findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(String userNm, String email);
+    static List<Member> findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(String userNm, String email) {
+        return null;
+    }
     //검색을 처리하는 쿼리메서드
     }
 
