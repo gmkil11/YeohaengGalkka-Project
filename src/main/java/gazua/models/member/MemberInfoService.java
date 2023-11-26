@@ -35,4 +35,10 @@ public class MemberInfoService implements UserDetailsService {
                 .member(member)
                 .build();
     }
+
+    public static List<Member> searchMembers(String query) {
+        // 회원 검색 로직을 구현
+        // 예시: 이름 또는 이메일이 검색어에 포함되는 회원을 찾음
+        return MemberRepository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(query, query);
+    }
 }
