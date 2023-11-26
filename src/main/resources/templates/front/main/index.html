@@ -22,7 +22,7 @@
     <!-- 배너 시작 -->
     <div class="banner" name="banner">
         <img src="https://img.freepik.com/free-photo/beautiful-beach-and-sea_74190-6620.jpg?w=1060&t=st=1700922019~exp=1700922619~hmac=eb4193d27e15a3109c3f486ab84f86e331dc05fce0d0e249b4cfda93fbf073b1">
-        <div class="banner_btn">
+        <div class="banner_btn" th:onclick="|window.location.href='@{/#}'|">
             보러가기
             <img th:src="@{img/icons/rightArrow.svg}">
         </div>
@@ -62,7 +62,7 @@
             <span>기다리던 휴가, </span>
             <span> 가족과 함께라면?</span>
         </div>
-        <a>더보기</a>
+        <a th:href="@{/#}">더보기</a>
     </div>
     <div #swiperRef="" class="swiper mySwiper" onmouseover="isMouseOn1()"  onmouseout="isMouseOut1()" >
         <div class="swiper-wrapper" >
@@ -151,7 +151,7 @@
             <span>아껴둔 연차로 </span>
             <span>연인과 떠나는 여행</span>
         </div>
-        <a>더보기</a>
+        <a th:href="@{/#}">더보기</a>
     </div>
     <div #swiperRef="" class="swiper mySwiper" onmouseover="isMouseOn2()" onmouseout="isMouseOut2()"   >
         <div class="swiper-wrapper" >
@@ -240,7 +240,7 @@
             <span>환상의 섬 </span>
             <span>제주도 어때요?</span>
         </div>
-        <a>더보기</a>
+        <a th:href="@{/#}">더보기</a>
     </div>
     <div #swiperRef="" class="swiper mySwiper" onmouseover="isMouseOn3()" onmouseout="isMouseOut3()"  >
         <div class="swiper-wrapper" >

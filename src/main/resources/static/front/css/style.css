@@ -325,14 +325,19 @@ p {
     height: 50px;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
     color: #000;
     font-size: 16px;
     font-weight: 300;
     letter-spacing: -0.24px;
+    cursor: pointer;
 }
 
-.banner_btn img{ width: 10px; height: 20px; }
+.banner_btn img{ width: 10px; height: 20px; transition: transform 0.3s ease-in-out;}
+
+.banner_btn:hover img {
+    transform: translateX(10px);
+}
 
 .category-box{ display: inline-flex; align-items: flex-start; gap: 80px; }
 
@@ -348,6 +353,10 @@ p {
 .category img { width: 45px; height: 40px; }
 
 .card-top-exp {display: flex; width: 100%; justify-content: space-between; margin-bottom: 0;}
+
+.card-top-exp a {
+    text-decoration: none;
+}
 
 .card-top-exp div {
     margin-left: 100px;
