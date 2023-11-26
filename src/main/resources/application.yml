@@ -2,9 +2,6 @@ server:
   port: 3000
 
 spring:
-  profiles:
-    active: dev
-
 
   # 데이터베이스 설정
   datasource:

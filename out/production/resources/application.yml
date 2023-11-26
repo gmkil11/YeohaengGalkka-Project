@@ -3,7 +3,6 @@ server:
 
 spring:
 
-
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
