@@ -1,13 +1,11 @@
 package gazua.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +16,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Room {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_seq_generator")
+    @SequenceGenerator(name = "room_seq_generator", sequenceName = "ROOM_SEQ", allocationSize = 1)
     private Long roomNum; // 숙소 번호
 
     @Column(length=65, nullable = false)
@@ -35,15 +35,12 @@ public class Room {
     @Column(length = 9, nullable = false)
     private String roomPr; // 객실 가격
 
-//    @Column(nullable = false)
-    @Column(updatable = false)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime checkIn; // 체크인 시간
+    private String roomInfo1;
 
-//    @Column(nullable = false)
-    private LocalDateTime checkOut; // 체크아웃 시간
+    private String roomInfo2;
 
-    private String roomInfo;
+    @Lob
+    private String roomInfo3;
 
     private boolean active; // 객실 활성화 유무
 

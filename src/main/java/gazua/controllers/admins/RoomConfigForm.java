@@ -1,6 +1,5 @@
 package gazua.controllers.admins;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import gazua.entities.FileInfo;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,21 +7,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class RoomConfigForm {
-    private String mode;
+    private String mode; // 모드
 
-    private String gid = UUID.randomUUID().toString();
+    private String gid = UUID.randomUUID().toString(); // 그룹아이디
 
-    private Long roomNum;        // 객실 번호
+    private Long roomNum; // 객실 번호
 
     @NotBlank(message = "사업자 이메일을 입력하세요.")
-    private String sellerId;
+    private String sellerId; // 판매자 이메일
 
     @NotBlank(message = "수용인원을 정하세요.")
     private String roomCount;   // 수용인원
@@ -30,13 +28,13 @@ public class RoomConfigForm {
     @NotBlank(message = "숙소 이름을 입력하세요.")
     private String roomName;      // 숙소 이름
 
-
     private String roomPr;      // 숙소 가격
 
-    @JsonFormat(pattern="HH:mm")
-    private LocalDateTime checkIn;  // 이용 시작 시간
+    private String roomInfo1; // 객실 설명1
 
-    private String roomInfo;
+    private String roomInfo2; // 객실 설명2
+
+    private String roomInfo3; // 객실 설명3
 
     private List<FileInfo> mainImages; // 상품 메인 이미지
 
