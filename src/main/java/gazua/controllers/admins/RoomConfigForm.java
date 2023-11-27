@@ -1,14 +1,14 @@
 package gazua.controllers.admins;
 
+import gazua.entities.FileInfo;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data @Builder
@@ -37,4 +37,11 @@ public class RoomConfigForm {
 
 
     private String roomInfo;
+
+    private List<FileInfo> mainImages; // 상품 메인 이미지
+
+    private List<FileInfo> listImages; // 목록 이미지
+
+    private List<FileInfo> descImages; // 상세 이미지
+
 }
