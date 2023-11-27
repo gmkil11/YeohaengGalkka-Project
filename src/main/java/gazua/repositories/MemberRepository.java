@@ -26,6 +26,6 @@ public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslP
         return null;
     }
     //검색을 처리하는 쿼리메서드
-    }
+}
 
 
