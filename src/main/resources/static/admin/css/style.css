@@ -24,11 +24,28 @@ select { border: 1px solid #d5d5d5; min-width: 150px; height: 45px; }
 
 /** 기본 스타일 - 체크박스, 라디오 버튼 */
 input[type='checkbox'] { display: none; }
-input[type='checkbox']+label { min-height: 32px; line-height: 1; padding: 3px 0 3px 33px; background:url("../../images/chk-off.png") no-repeat left center; }
-input[type='checkbox']:checked+label { background:url("../../images/chk-on.png") no-repeat left center; }
 
-input[type='radio'] { display: none; }
-input[type='radio']+label { min-height: 24px; line-height: 1; padding: 3px 0 3px 25px; background:url("../../images/radio-off.png") no-repeat left center; }
+input[type='checkbox']+label { width:17px;
+    height:17px;
+    border:1px solid #000;
+    content:"";
+    display:inline-block;
+    border-radius: 4px;
+    vertical-align:middle;
+    transition: all 0.3s;}
+
+input[type='checkbox']:checked+label { content: "";
+    width: 17px;
+    height: 17px;
+    background-color: #1DC078;
+    border-color: #000;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url('../../img/icons/check.svg');
+    transition: all 0.3s;}
+
+/*input[type='radio'] { display: none; }*/
+input[type='radio']+label { min-height: 24px; line-height: 1; padding: 3px 0 3px 0; background:url("../../images/radio-off.png") no-repeat left center; }
 input[type='radio']:checked+label { background:url("../../images/radio-on.png") no-repeat left center; }
 
 .dn { display: none !important; }
@@ -75,7 +92,7 @@ h2 { font-size: 18px; font-weight: bold; margin: 25px 0 10px; line-height: 1; }
 /** 기본 테이블 스타일 */
 .table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
 .table-cols th { background: #f8f8f8; width: 160px; padding: 10px 20px; text-align: left; }
-.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols td { background: #fff; padding: 10px 20px; }
 .table-cols th,
 .table-cols td { border-bottom: 1px solid #d5d5d5; }
 

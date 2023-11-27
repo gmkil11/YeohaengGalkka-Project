@@ -187,6 +187,12 @@ header {
 
 .rows img {
     margin-left: 20px;
+
+}
+
+form .rows:nth-child(5) img {
+    margin-left: 23px;
+    margin-right: 3px;
 }
 
 
@@ -250,13 +256,14 @@ header {
     border-radius: 4px;
     vertical-align:middle;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 .checked {
     content: "";
     width: 17px;
     height: 17px;
-    background-color: #767676;
+    background-color: #1DC078;
     border-color: #000;
     background-repeat: no-repeat;
     background-position: 50%;
@@ -391,6 +398,7 @@ p {
     gap: 16px;
     cursor: pointer;
 }
+
 
 .card > div span:first-of-type {
     color: #000;

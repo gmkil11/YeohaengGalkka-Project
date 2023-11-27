@@ -37,6 +37,7 @@ public class MemberSaveService {
                 .mobile(form.getMobile())
                 .mtype(MemberType.USER)
                 .password(hash)
+                .active(true)
                 .build();
 
         save(member);

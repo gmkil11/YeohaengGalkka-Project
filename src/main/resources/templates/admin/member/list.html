@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content">
+    <h1>회원 목록</h1>
+
+    <!-- 검색 폼 추가 -->
+    <form method="get" th:action="@{/admin/member}" class="search-form">
+        <label for="search">회원 검색:</label>
+        <input type="text" id="search" name="search" th:value="${param.search}" placeholder="이메일 또는 이름으로 검색">
+        <button type="submit">검색</button>
+    </form>
+
+    <form method="post" th:action="@{/admin/member/update}" target="ifrmProcess" autocomplete="off">
+        <table class="table-cols">
+            <thead>
+            <tr>
+                <th width="30">
+                    <input type="checkbox" class="checkall" data-target-name="userNos" id="checkall">
+                    <label for="checkall"></label>
+                </th>
+                <th>이메일</th>
+                <th>이름</th>
+                <th>가입일</th>
+                <th>활성화 여부</th>
+                <th>권한</th>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 반복문을 통해 회원 목록을 표시 -->
+            <tr th:each="member, status : ${memberList}" th:object="${member}">
+                <td>
+                    <input type="checkbox" name="userNos" th:value="*{userNo}" th:id="${'userNos_' + status.index}">
+                    <label th:for="${'userNos_' + status.index}"></label>
+                </td>
+                <td th:text="*{email}"></td>
+                <td th:text="*{userNm}"></td>
+                <td th:text="*{#temporals.format(createdAt, 'yyyy년/MM월/dd일 HH:mm')}"></td>
+                <td nowrap>
+                    <input type="radio" th:name="*{'active_' + userNo}" value="true" th:id="*{'active_' + userNo + '_true'}" th:checked="*{active}">
+                    <label th:for="*{'active_' + userNo + '_true'}">활성화</label>
+                    <input type="radio" th:name="*{'active_' + userNo}" value="false" th:id="*{'active_' + userNo + '_false'}" th:checked="*{!active}">
+                    <label th:for="*{'active_' + userNo + '_false'}">비활성화</label>
+                </td>
+                <td>
+                    <select th:name="*{'mtype_' + userNo}">
+                        <option th:each="type : ${memberTypes}" th:value="${type[0]}" th:text="${type[1]}" th:selected="${type[0] == member.mtype.name()}"></option>
+                    </select>
+                </td>
+                <!-- 다른 내용 불러올 때 더 추가하기 -->
+            </tr>
+            </tbody>
+        </table>
+        <th:block th:if="${memberList == null or memberList.isEmpty()}">가입되어 있는 회원이 없습니다!</th:block>
+        <div class="table-action">
+            <button type="submit" class="sbtn">선택회원 수정하기</button>
+        </div>
+    </form>
+
+</section>
+</html>

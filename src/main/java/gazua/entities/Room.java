@@ -17,7 +17,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Room {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_seq_generator")
+    @SequenceGenerator(name = "room_seq_generator", sequenceName = "ROOM_SEQ", allocationSize = 1)
     private Long roomNum; // 숙소 번호
 
     @Column(length=65, nullable = false)
@@ -33,12 +35,6 @@ public class Room {
 
     @Column(length = 9, nullable = false)
     private String roomPr; // 객실 가격
-
-//    @Column(nullable = false)
-    private LocalDateTime checkIn; // 체크인 시간
-
-//    @Column(nullable = false)
-    private LocalDateTime checkOut; // 체크아웃 시간
 
     private String roomInfo1;
 

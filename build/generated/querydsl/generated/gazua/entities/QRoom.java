@@ -21,10 +21,6 @@ public class QRoom extends EntityPathBase<Room> {
 
     public final BooleanPath active = createBoolean("active");
 
-    public final DateTimePath<java.time.LocalDateTime> checkIn = createDateTime("checkIn", java.time.LocalDateTime.class);
-
-    public final DateTimePath<java.time.LocalDateTime> checkOut = createDateTime("checkOut", java.time.LocalDateTime.class);
-
     public final StringPath gid = createString("gid");
 
     public final StringPath roomCount = createString("roomCount");

@@ -2,6 +2,7 @@ package gazua.models.room.config;
 
 import gazua.controllers.admins.RoomConfigForm;
 import gazua.entities.Room;
+import gazua.repositories.FileInfoRepository;
 import gazua.repositories.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.util.StringUtils;
 public class RoomConfigSaveService {
 
    private final RoomRepository repository;
+   private final FileInfoRepository fileInfoRepository;
 
     public void save(RoomConfigForm form) {
         String roomName = form.getRoomName();
@@ -21,20 +23,19 @@ public class RoomConfigSaveService {
             room = repository.findByRoomName(roomName).orElseThrow();
         } else {        // 추가
             room = new Room();
-            room.setGid(form.getGid());
-            room.setRoomName(form.getRoomName());
-            room.setRoomNum(form.getRoomNum());
-            room.setSellerId(form.getSellerId());
-            room.setRoomCount(form.getRoomCount());
-            room.setRoomPr(form.getRoomPr());
-            //room.setCheckIn(form.getCheckIn());
-            room.setRoomInfo1(form.getRoomInfo1());
-            room.setRoomInfo2(form.getRoomInfo2());
-            room.setRoomInfo3(form.getRoomInfo3());
-            room.setActive(true);
-            room.setMainImages(form.getMainImages());
-            room.setListImages(form.getListImages());
-            room.setDescImages(form.getDescImages());
+            room.setGid(form.getGid()); // 그룹 아이디
+            room.setRoomName(form.getRoomName()); // 객실 이름
+            room.setSellerId(form.getSellerId()); // 판매자 아이디
+            room.setRoomCount(form.getRoomCount()); // 수용 인원
+            room.setRoomPr(form.getRoomPr()); // 객실 가격
+            room.setRoomInfo1(form.getRoomInfo1()); // 객실 정보1
+            room.setRoomInfo2(form.getRoomInfo2()); // 객실 정보2
+            room.setRoomInfo3(form.getRoomInfo3()); // 객실 정보3
+            room.setActive(true); // 객실 활성화 설정
+
+
+            fileInfoRepository.processDone(form.getGid());
+
 
             repository.saveAndFlush(room);
         }

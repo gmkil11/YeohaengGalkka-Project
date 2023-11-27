@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,8 +22,8 @@ public class FileUploadService {
     private final FileInfoService infoService;
 
     // 썸네일 생성 사이즈
-    private int width = 150;
-    private int height = 150;
+    private int width = 300;
+    private int height = 250;
 
     /**
      * 파일을 업로드하고 관련 정보를 저장
@@ -47,6 +48,7 @@ public class FileUploadService {
                     .extension(extension)
                     .gid(gid)
                     .location(location)
+                    .createdDt(LocalDateTime.now())
                     .build();
 
             repository.saveAndFlush(item);

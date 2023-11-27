@@ -16,4 +16,8 @@ public class CommonException extends RuntimeException{
         super(message);
         this.status = status;
     }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
 }

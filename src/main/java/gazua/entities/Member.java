@@ -31,4 +31,8 @@ public class Member extends Base {
     @Column(length=20, nullable = false)
     private MemberType mtype = MemberType.USER;
 
+    // 계정의 활성화와 비활성화에 대한 컬럼
+    @Column(nullable = false)
+    private Boolean active = true;
+
 }

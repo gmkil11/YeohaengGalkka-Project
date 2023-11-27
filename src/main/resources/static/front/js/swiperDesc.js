@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener('DOMContentLoaded', (event) => {
     var swiper = new Swiper(".mySwiper", {
         loop: true,
         spaceBetween: 10,

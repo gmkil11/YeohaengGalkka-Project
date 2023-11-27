@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{front/layouts/main}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/joinLogin}">
 
-<main layout:fragment="content">
-    <form method="post" th:action="@{/member/login}" autocomplete="off">
+<main layout:fragment="content" class="member-style">
+    <div class="logoBox" th:onclick="|window.location.href='@{/}'|">
+        <img th:src="@{/img/logo.svg}" alt="logo">
+        <img th:src="@{/img/logo2.svg}" alt="logo">
+    </div>
+    <form method="post" th:action="@{/member/login}" autocomplete="off" class="member-box">
         <input th:if="${redirectURL != null}" type="hidden" name="redirectURL" th:value="${redirectURL}">
-        <div class="rows">
+        <div class="rows" th:classappend="${session.NotBlank_email} ? 'error-box' : ''">
+            <img th:src="@{/img/icons/email.svg}">
             <input type="text" name="email" th:placeholder="#{이메일}" th:value="${session.email}">
-            <div class="error" th:if="${session.NotBlank_email != null}" th:text="${session.NotBlank_email}"></div>
         </div>
-        <div class="rows">
+        <div class="error" th:if="${session.NotBlank_email != null}" th:text="${session.NotBlank_email}"></div>
+        <div class="rows" th:classappend="${session.NotBlank_password} ? 'error-box' : ''">
+            <img th:src="@{/img/icons/password.svg}" >
             <input type="password" name="password" th:placeholder="#{비밀번호}">
-            <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
         </div>
-        <button type="submit" th:text="#{로그인}"></button>
+        <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
+        <button type="submit" th:text="#{로그인}" ></button>
+        <button type="button" th:text="#{회원가입}"  th:onclick="|window.location.href='@{/member/join}'|"></button>
         <div class="error" th:if="${session.globalError != null}" th:text="${session.globalError}"></div>
     </form>
 </main>
