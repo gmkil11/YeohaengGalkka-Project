@@ -22,6 +22,6 @@ public interface ScriptExceptionProcess {
 
         model.addAttribute("script", script);
 
-        return "common/_execute_script";
+        return "commons/_execute_script";
     }
 }
