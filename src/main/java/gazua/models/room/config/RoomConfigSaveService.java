@@ -28,7 +28,9 @@ public class RoomConfigSaveService {
             room.setRoomCount(form.getRoomCount());
             room.setRoomPr(form.getRoomPr());
             //room.setCheckIn(form.getCheckIn());
-            room.setRoomInfo(form.getRoomInfo());
+            room.setRoomInfo1(form.getRoomInfo1());
+            room.setRoomInfo2(form.getRoomInfo2());
+            room.setRoomInfo3(form.getRoomInfo3());
             room.setActive(true);
             room.setMainImages(form.getMainImages());
             room.setListImages(form.getListImages());

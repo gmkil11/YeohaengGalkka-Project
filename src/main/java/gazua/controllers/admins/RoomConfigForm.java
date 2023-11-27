@@ -36,8 +36,11 @@ public class RoomConfigForm {
 
     private LocalTime checkIn;  // 이용 시작 시간
 
+    private String roomInfo1;
 
-    private String roomInfo;
+    private String roomInfo2;
+
+    private String roomInfo3;
 
     private List<FileInfo> mainImages; // 상품 메인 이미지
 

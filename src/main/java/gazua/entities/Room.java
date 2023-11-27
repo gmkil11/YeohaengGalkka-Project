@@ -40,7 +40,12 @@ public class Room {
 //    @Column(nullable = false)
     private LocalDateTime checkOut; // 체크아웃 시간
 
-    private String roomInfo;
+    private String roomInfo1;
+
+    private String roomInfo2;
+
+    @Lob
+    private String roomInfo3;
 
     private boolean active; // 객실 활성화 유무
 
