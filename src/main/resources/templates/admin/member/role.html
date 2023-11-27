@@ -6,8 +6,8 @@
     <h1>회원 권한</h1>
     <form method="post" th:action="@{/admin/member/role}">
         <p>권한을 변경할 계정을 검색해주세요</p>
-        <input type="text" placeholder="이메일을 입력해주세요" name="email">
-        <button type="submit">검색</button>
+        <input type="text" placeholder="이메일을 입력해주세요" name="email" th:value="${param.email}">
+        <button type="submit" name="submitButton" value="search">검색</button>
     </form>
     <th:block th:if="${member}">
         <form method="post" th:action="@{/admin/member/role}">
@@ -34,7 +34,7 @@
                     </select>
                 </td>
                 <td>
-                    <button type="submit">수정</button>
+                    <button type="submit" name="submitButton" value="delete">수정</button>
                 </td>
                 <!-- 다른 내용 불러올 때 더 추가하기 -->
                 <a th:href="@{/member/search}">회원 검색</a>

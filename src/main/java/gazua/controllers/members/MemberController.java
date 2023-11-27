@@ -48,6 +48,7 @@ public class MemberController implements CommonProcess {
         return "redirect:/member/login";
     }
 
+
     @GetMapping("/login")
     public String login(String redirectURL, Model model) {
         commonProcess(model, "로그인");
