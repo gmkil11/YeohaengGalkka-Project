@@ -6,6 +6,7 @@
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/front/css/swiperDesc.css}">
     <!-- DatePicker CSS -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
@@ -31,36 +32,24 @@
     <!--스위퍼-->
     <div class="swiper-box">
         <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+            <div class="swiper-wrapper" >
+                <div class="swiper-slide" th:each="image, stat : ${room.mainImages}">
+                    <img th:src="${image.fileUrl}" />
                 </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                <div class="swiper-slide" th:each="image, stat : ${room.descImages}">
+                    <img th:src="${image.fileUrl}" />
                 </div>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
         <div thumbsSlider="" class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+            <div class="swiper-wrapper" >
+                <div class="swiper-slide" th:each="image, stat : ${room.mainImages}">
+                    <img th:src="${image.fileUrl}" />
                 </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                <div class="swiper-slide" th:each="image, stat : ${room.descImages}">
+                    <img th:src="${image.fileUrl}" />
                 </div>
             </div>
         </div>
@@ -68,8 +57,8 @@
     </div>
     <!-- 객실 설명 -->
     <div class="room-exp">
-        <h1>강릉 켄싱턴 리조트</h1>
-        <p>부모님이 만족하고 아이들이 좋아하는 가족형 리조트</p>
+        <h1 th:text="${room.getRoomName()}">객실 이름</h1>
+        <p th:text="${room.getRoomInfo1()}">객실 설명1</p>
     </div>
     <hr class="title-hr"/>
     <!--결제 박스-->
@@ -95,25 +84,12 @@
                         <p class="pr">인수</p>
                     </div>
                     <select>
-                        <option value="1">1명</option>
-                        <option value="2">2명</option>
-                        <option value="3">3명</option>
-                        <option value="4">4명</option>
-                        <option value="5">5명</option>
-                        <option value="6">6명</option>
+                        <option th:each="count : ${#numbers.sequence(1, room.roomCount)}" th:value="${count}" th:text="${count} + 명">객실 최대 수용 인수</option>
                     </select>
                 </div>
             </div>
-            <p class="select-box-info">
-                Lorem ipsum dolor sit amet consectetur.
-                Pharetra vitae amet viverra mauris habitasse.
-                Vulputate feugiat nec accumsan proin curabitur.
-                Sed egestas odio vitae venenatis facilisi in.
-                Nisl tristique pretium libero tellus ullamcorper
-                ut fusce scelerisque dignissim.
-                Ornare lacus felis faucibus phasellus fermentum.
-                Aliquam et eget leo commodo imperdiet ut.
-                Scelerisque tempus id quis interdum ac porta varius.
+            <p class="select-box-info" th:text="${room.getRoomInfo2()}">
+                객실 설명2
             </p>
             <button type="submit" class="login_button">예약하기</button>
         </div>
@@ -121,32 +97,16 @@
 
     <div class="room-exp-area" id="roomExpArea">
         <!--객실 사진-->
-        <div class="set-middle">
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg">
-            <img src="https://swiperjs.com/demos/images/nature-2.jpg">
-            <img src="https://swiperjs.com/demos/images/nature-3.jpg">
-            <img src="https://swiperjs.com/demos/images/nature-4.jpg">
+        <div class="set-middle" th:each="image, stat : ${room.mainImages}">
+            <img th:src="${image.fileUrl}" />
+        </div>
+        <div class="set-middle" th:each="image, stat : ${room.descImages}">
+            <img th:src="${image.fileUrl}" />
         </div>
         <hr class="d-hr"/>
         <!-- 설명 -->
-        <div class="set-middle">
-            <p>
-                Lorem ipsum dolor sit amet consectetur. Neque aliquam vitae ultrices aliquam amet.
-                In in purus ipsum leo odio risus quam eget. Quis ut semper pellentesque id sed.
-
-                Lectus eu netus risus quam metus non sapien sed. Elit viverra quis tincidunt porta
-                diam. Arcu id cum arcu tellus. Urna est ac vitae enim purus scelerisque ac. Ut etiam
-                ut sollicitudin aliquam commodo volutpat ornare lacus.
-                Sollicitudin in sagittis ante mi at amet. Elit ridiculus pellentesque aenean quis.
-                Libero mi turpis elementum odio leo gravida. Tristique eu fusce sed est gravida in
-
-                turpis et nulla. Interdum vitae ac dui risus vel molestie sollicitudin eget platea.
-                Enim arcu elementum maecenas consequat augue augue senectus cursus. Molestie laoreet
-                est viverra nunc posuere dui eget pellentesque. Platea nunc vel sed diam. Metus urna
-
-                elit semper posuere nunc cursus maecenas et mattis. Dui eu sed id in aliquet vulputate
-                sollicitudin. Ultrices mauris mauris tincidunt amet morbi netus velit facilisis.
-
+        <div class="set-middle" >
+            <p th:text="${room.getRoomInfo3()}">
             </p>
         </div>
 

@@ -27,6 +27,8 @@ public class QFileInfo extends EntityPathBase<FileInfo> {
     //inherited
     public final StringPath createdBy = _super.createdBy;
 
+    public final DateTimePath<java.time.LocalDateTime> createdDt = createDateTime("createdDt", java.time.LocalDateTime.class);
+
     public final BooleanPath done = createBoolean("done");
 
     public final StringPath extension = createString("extension");

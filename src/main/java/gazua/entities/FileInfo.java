@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -36,6 +37,8 @@ public class FileInfo extends BaseMember {
     private String fileType;
 
     private boolean done; // 작업 완료 여부
+
+    private LocalDateTime createdDt;
 
     @Transient
     private String filePath; // 실 서버 업로드 경로

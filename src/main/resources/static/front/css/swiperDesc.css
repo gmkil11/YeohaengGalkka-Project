@@ -1,7 +1,7 @@
 /* 룸 상세보기 스위퍼 시작 */
 .swiper-box{ width: 80vw; margin: 20px auto auto; }
 
-.swiper { width: 100%; height: 100%; margin-top: 10px; }
+.swiper { width: 100%; height: 100%;}
 
 .swiper-slide {
     text-align: center;
@@ -16,7 +16,7 @@
 
 
 
-.swiper { width: 100%; height: 60vh; margin-left: auto; margin-right: auto; }
+.swiper { width: 100%; height: 660px; margin-left: auto; margin-right: auto; }
 
 .swiper-slide { background-size: cover; background-position: center; }
 

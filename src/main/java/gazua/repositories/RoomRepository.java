@@ -8,5 +8,8 @@ import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room, Long>, QuerydslPredicateExecutor<Room> {
 
+
     Optional<Room> findByRoomName(String roomName);
+
 }
+

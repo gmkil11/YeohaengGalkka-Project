@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", (event) => {
+window.onload = function() {
     var swiper = new Swiper(".mySwiper", {
         loop: true,
         spaceBetween: 10,
@@ -17,4 +17,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
             swiper: swiper,
         },
     });
-});
+};
