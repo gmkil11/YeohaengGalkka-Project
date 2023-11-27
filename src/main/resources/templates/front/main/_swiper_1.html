@@ -7,13 +7,13 @@
   <div #swiperRef="" class="swiper mySwiper mySwiper1" onmouseover="isMouseOn2()" onmouseout="isMouseOut2()"   >
     <div class="swiper-wrapper">
       <div class="swiper-slide"  th:each="room: ${roomList}">
-        <div class="card" th:onclick="|window.location.href='@{/#}'|">
-          <img th:src="${room.mainImages[0].thumbsUrl[0]}" alt="img">
+        <div class="card" th:onclick="|window.location.href='/room/' + ${room.getRoomNum()}|">
+        <img th:src="${room.mainImages[0].thumbsUrl[0]}" alt="img">
           <div>
             <span th:text="${room.getRoomName()}">강릉 켄싱턴 리조트</span>
             <span th:text="${room.getRoomInfo1()}">부모님이 만족하고 아이들이 좋아하는 가족형 리조트</span>
           </div>
-          <span th:text="${room.getRoomPr()}">160,000원/1박</span>
+          <span th:text="${#numbers.formatInteger(room.getRoomPr(), 3, 'COMMA')} +'원/1박'">160,000원/1박</span>
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ public class mainController {
 
         roomList.forEach(room -> roomConfigInfoService.get(room.getRoomNum()));
 
-        System.out.println(roomList);
+        System.out.println("객실!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+roomList);
 
         model.addAttribute("roomList", roomList);
 

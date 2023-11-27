@@ -55,7 +55,7 @@
     <!-- 숙소 분류 별 메뉴 끝 -->
 
     <!--  추천 객실 1 시작 -->
-    <div class="card-top-exp">
+    <div class="card-top-exp" th:if="${#lists.size(roomList) > 0}">
         <div>
             <span>기다리던 휴가, </span>
             <span> 가족과 함께라면?</span>
