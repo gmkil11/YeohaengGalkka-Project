@@ -33,8 +33,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(commonInterceptor)
                 .addPathPatterns("/**");
 
-        //registry.addInterceptor(siteConfigInterceptor)
-        //        .addPathPatterns("/**");
+        registry.addInterceptor(siteConfigInterceptor)
+                .addPathPatterns("/**");
     }
 
     @Override

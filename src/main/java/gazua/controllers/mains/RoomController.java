@@ -13,7 +13,7 @@ public class RoomController {
 
     // 변경 해야함 !!!
     @GetMapping
-    public String viewRoom(Model model) {
+    public String viewRoom() {
 
         return "front/room/room";
     }

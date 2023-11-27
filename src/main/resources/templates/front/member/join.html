@@ -1,112 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{front/layouts/joinLogin}">
+      layout:decorate="~{front/layouts/main}">
 
-<th:block layout:fragment="addScript">
-
-    <!-- CheckBox JS -->
-    <script th:src="@{/front/js/checkbox.js}"></script>
-
-</th:block>
-
-<main layout:fragment="content" class="member-style">
-    <div class="logoBox" th:onclick="|window.location.href='@{/}'|">
-        <img th:src="@{/img/logo.svg}" alt="logo">
-        <img th:src="@{/img/logo2.svg}" alt="logo">
-    </div>
-    <form method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}" class="member-box">
-        <div class="rows" th:classappend="${#fields.hasErrors('email')} ? 'error-box' : ''">
-            <img th:src="@{/img/icons/email.svg}">
+<main layout:fragment="content">
+    <form method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
+        <div class="rows">
             <input type="text" name="email" th:placeholder="#{이메일}" th:field="*{email}">
+            <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
         </div>
-        <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
-        <div class="rows" th:classappend="${#fields.hasErrors('password')} ? 'error-box' : ''">
-            <img th:src="@{/img/icons/password.svg}">
+        <div class="rows">
             <input type="password" name="password" th:placeholder="#{비밀번호}" th:field="*{password}">
+            <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
         </div>
-        <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
-        <div class="rows" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'error-box' : ''">
-            <img th:src="@{/img/icons/passwordCheck.svg}">
+        <div class="rows">
             <input type="password" name="confirmPassword" th:placeholder="#{비밀번호_확인}" th:field="*{confirmPassword}">
+            <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
         </div>
-        <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
 
-        <div class="rows" th:classappend="${#fields.hasErrors('userNm')} ? 'error-box' : ''">
-            <img th:src="@{/img/icons/people.svg}">
+        <div class="rows">
             <input type="text" name="userNm" th:placeholder="#{회원명}" th:field="*{userNm}">
+            <div class="error" th:each="err : ${#fields.errors('userNm')}" th:text="${err}"></div>
         </div>
-        <div class="error" th:each="err : ${#fields.errors('userNm')}" th:text="${err}"></div>
 
-        <div class="rows"  th:classappend="${#fields.hasErrors('mobile')} ? 'error-box' : ''">
-            <img th:src="@{/img/icons/mobile.svg}">
+        <div class="rows">
             <input type="text" name="mobile" th:placeholder="#{휴대전화번호}" th:field="*{mobile}">
+            <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
         </div>
-        <div class="error" th:each="err : ${#fields.errors('mobile')}" th:text="${err}"></div>
 
-        <div class="agreeBox">
+        <div class="rows">
             <pre class="terms" th:text="${@siteConf.get('joinTerms')}"></pre>
-        <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
-            <div class="checkbox-container">
-                <div id="checkboxAll" class="checkbox"></div>
-                <input type="checkbox" class="agree allAgree" id="selectAll" name="agree"  onclick='toggleAll(this); toggleCheckbox();'  th:field="*{agree}">
-                <label for="selectAll" class="allAgreeText" th:text="#{모두_확인하였으며_동의합니다.}"></label>
-            </div>
-            <hr>
-
-            <div class="checkbox-container">
-                <div id="checkbox1" class="checkbox"></div>
-                <input type="checkbox" id="ageAgree" class="agree"  name="ageAgree" onclick=' checkSelectAll(); toggleCheckbox();' value="true">
-                <label for="ageAgree" class="agreeText" th:text="#{만_14세_이상_이용동의}"></label>
-            </div>
-
-            <div class="checkbox-container">
-                <div id="checkbox2" class="checkbox"></div>
-                <input type="checkbox" id="termsOfUser" class="agree"  name="termsOfUser" onclick=' checkSelectAll(); toggleCheckbox();' value="true" >
-                <label for="termsOfUser" class="agreeText" th:text="#{여행갈까_이용약관_동의}"></label>
-            </div>
-
-            <div class="checkbox-container">
-                <div id="checkbox3" class="checkbox"></div>
-                <input type="checkbox" id="privacy" class="agree"  name="privacy" onclick=' checkSelectAll(); toggleCheckbox();' value="true" >
-                <label for="privacy" class="agreeText" th:text="#{개인정보_수집_및_이용_동의}"></label>
-            </div>
-
-            <div class="checkbox-container">
-                <div id="checkbox4" class="checkbox"></div>
-                <label for="thirdPartyAgree" class="agreeText" th:text="#{개인정보_제3자_제공_동의}"></label>
-                <input type="checkbox" id="thirdPartyAgree" class="agree"  name="thirdPartyAgree" onclick=' checkSelectAll(); toggleCheckbox();' value="true" >
-            </div>
+            <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
+            <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
         </div>
 
         <button type="submit" th:text="#{회원가입}"></button>
 
     </form>
-    <script>
-        let emailError = document.getElementsByName("email");
-        let passwordError = document.getElementsByName("password");
-        let confirmPasswordError = document.getElementsByName("confirmPassword");
-        let userNmError = document.getElementsByName("userNm");
-        let mobileError = document.getElementsByName("mobile");
-
-        function addErrorBorder(errors, className) {
-            errors.forEach(function (error) {
-                if (error.textContent !== "") {
-                    error.closest(".rows").classList.add(className);
-                }
-            });
-        }
-
-        addErrorBorder(emailError, 'error');
-        addErrorBorder(passwordError, 'error');
-        addErrorBorder(confirmPasswordError, 'error');
-        addErrorBorder(userNmError, 'error');
-        addErrorBorder(mobileError, 'error');
-
-
-
-    </script>
-
 </main>
 
 </html>
