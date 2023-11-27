@@ -3,6 +3,7 @@ package gazua.controllers.admins;
 import gazua.commons.CommonProcess;
 import gazua.commons.ScriptExceptionProcess;
 import gazua.commons.menus.Menu;
+import gazua.entities.Room;
 import gazua.repositories.RoomRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -31,6 +32,8 @@ public class RoomController implements CommonProcess, ScriptExceptionProcess {
     @GetMapping
     public String list(Model model) {
         commonProcess("list", model);
+        List<Room> roomList = repository.findAll();
+        model.addAttribute("roomList", roomList);
         return "admin/room/list";
     }
 
