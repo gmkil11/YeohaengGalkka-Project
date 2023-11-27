@@ -15,7 +15,7 @@ public class SearchController {
         this.memberRepository = memberRepository;
     }
 
-    @GetMapping("/admin/member")
+
     public String adminMemberList(@RequestParam(name = "search", required = false) String search, Model model) {
         if (search != null && !search.isEmpty()) {
             model.addAttribute("memberList", MemberRepository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search));
