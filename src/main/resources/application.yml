@@ -6,6 +6,7 @@ spring:
   profiles:
     active: dev
 
+
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
@@ -52,7 +53,7 @@ spring:
 
 file:
   upload:
-    path: C:/uploads/
+    path: /Users/mingyugil/Documents/myProj/YeohaengGalkka-Project/src/main/resources/static/roomImg/
     url: /uploads/
 
 # 로거 설정

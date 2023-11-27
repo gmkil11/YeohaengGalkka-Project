@@ -1,13 +1,12 @@
 server:
-  port: 3000
+  port: 3001
 
 spring:
-
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:orcl
-    username: PROJECT
+    username: GAZUA
     password: _aA123456
 
   # JPA 설정
@@ -30,17 +29,26 @@ spring:
       maxRequestSize: 40MB
 
   # 정적 자원 설정(CSS, JS, 이미지)
-  resources:
-    staticLocations: file:src/main/resources/static/
+  web:
+    resources:
+      staticLocations: file:src/main/resources/static/
+
+  # 라이브 리로드 설정
+  devtools:
+    livereload:
+      enabled: true
 
   # 타임리프 설정
   thymeleaf:
-    cache: true
-    prefix: classpath:/templates/
+    cache: false
+    prefix: file:src/main/resources/templates/
+
+  flyway:
+    enabled: true
 
 file:
   upload:
-    path: /home/team/uploads/
+    path: /Users/mingyugil/Documents/myProj/YeohaengGalkka-Project/src/main/resources/static/roomImg/
     url: /uploads/
 
 # 로거 설정
