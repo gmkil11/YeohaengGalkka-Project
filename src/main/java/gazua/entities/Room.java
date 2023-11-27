@@ -1,5 +1,6 @@
 package gazua.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,8 @@ public class Room {
     private String roomPr; // 객실 가격
 
 //    @Column(nullable = false)
+    @Column(updatable = false)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime checkIn; // 체크인 시간
 
 //    @Column(nullable = false)

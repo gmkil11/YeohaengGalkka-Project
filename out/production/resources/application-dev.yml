@@ -1,11 +1,11 @@
 server:
-  port: 3000
+  port: 3001
 
 spring:
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XE
+    url: jdbc:oracle:thin:@localhost:1521:orcl
     username: GAZUA
     password: _aA123456
 
@@ -20,7 +20,7 @@ spring:
         use_sql_comments: true
         dialect: org.hibernate.dialect.OracleDialect
     hibernate:
-      ddlAuto: validate
+      ddlAuto: update
 
   # 파일 업로드 설정
   servlet:
@@ -48,7 +48,7 @@ spring:
 
 file:
   upload:
-    path: C:/uploads/
+    path: /Users/mingyugil/Documents/myProj/YeohaengGalkka-Project/src/main/resources/static/roomImg/
     url: /uploads/
 
 # 로거 설정

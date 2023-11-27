@@ -1,5 +1,6 @@
 package gazua.controllers.admins;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import gazua.entities.FileInfo;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,9 +33,8 @@ public class RoomConfigForm {
 
     private String roomPr;      // 숙소 가격
 
-
-    private LocalTime checkIn;  // 이용 시작 시간
-
+    @JsonFormat(pattern="HH:mm")
+    private LocalDateTime checkIn;  // 이용 시작 시간
 
     private String roomInfo;
 
