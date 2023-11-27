@@ -2,9 +2,6 @@ server:
   port: 3000
 
 spring:
-  # 프로필 설정
-  profiles:
-    active: dev
 
   # 데이터베이스 설정
   datasource:

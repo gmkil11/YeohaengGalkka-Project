@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content">
+    <h1>숙소 등록</h1>
+    <form>
+        <th:block th:replace="~{admin/room/_form::common}"></th:block>
+    </form>
+</section>
+</html>
