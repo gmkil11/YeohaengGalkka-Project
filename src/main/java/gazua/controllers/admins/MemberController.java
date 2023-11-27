@@ -34,10 +34,16 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
 
     @GetMapping
-    public String list(Model model) {
+    public String list(@RequestParam(name = "search", required = false) String search ,Model model) {
         commonProcess("list", model);
         List<Member> memberList = repository.findAll();
         model.addAttribute("memberList", memberList);
+
+         if (search != null && !search.isEmpty()) {
+             model.addAttribute("memberList", MemberRepository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search));
+            } else {
+                model.addAttribute("memberList", memberList);
+            }
 
         return "admin/member/list";
     }
