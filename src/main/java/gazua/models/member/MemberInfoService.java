@@ -18,7 +18,6 @@ import java.util.List;
 public class MemberInfoService implements UserDetailsService {
 
     private final MemberRepository repository;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -34,5 +33,11 @@ public class MemberInfoService implements UserDetailsService {
                 .authorities(authorities)
                 .member(member)
                 .build();
+    }
+
+    public List<Member> searchMembers(String query) {
+        // 회원 검색 로직을 구현
+        // 예시: 이름 또는 이메일이 검색어에 포함되는 회원을 찾음
+        return repository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(query, query);
     }
 }
