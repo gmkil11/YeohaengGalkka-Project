@@ -5,16 +5,14 @@ import gazua.commons.ScriptExceptionProcess;
 import gazua.commons.menus.Menu;
 import gazua.commons.menus.MenuDetail;
 import gazua.entities.Member;
+import gazua.models.member.MemberSearchService;
 import gazua.repositories.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +27,8 @@ import java.util.Optional;
 public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
     private final HttpServletRequest request;
+    private final MemberSearchService memberSearchService;
     private final MemberRepository repository;
-
 
 
     @GetMapping
@@ -132,5 +130,12 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
         List<MenuDetail> submenus = Menu.gets("member");
         model.addAttribute("submenus", submenus);
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        List<Member> searchResults = memberSearchService.searchMembers(query);
+        model.addAttribute("members", searchResults);
+        return "member/searchResults";
     }
 }
