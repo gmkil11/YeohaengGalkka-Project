@@ -38,8 +38,8 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
         model.addAttribute("memberList", memberList);
 
          if (search != null && !search.isEmpty()) {
-             model.addAttribute("memberList", MemberRepository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search));
-            } else {
+             model.addAttribute("memberList", repository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search));
+         } else {
                 model.addAttribute("memberList", memberList);
             }
 

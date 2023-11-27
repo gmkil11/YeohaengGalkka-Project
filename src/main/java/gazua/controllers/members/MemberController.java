@@ -26,7 +26,8 @@ public class MemberController implements CommonProcess {
     private final Utils utils;
     private final MemberUtil memberUtil;
     private final MemberSaveService saveService;
-    
+    private final MemberInfoService memberInfoService;  // 추가: MemberInfoService 주입
+
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model) {
         commonProcess(model, "회원가입");
@@ -47,7 +48,6 @@ public class MemberController implements CommonProcess {
         return "redirect:/member/login";
     }
 
-
     @GetMapping("/login")
     public String login(String redirectURL, Model model) {
         commonProcess(model, "로그인");
@@ -59,7 +59,7 @@ public class MemberController implements CommonProcess {
 
     @GetMapping("/search")
     public String search(@RequestParam String query, Model model) {
-        List<Member> searchResults = MemberInfoService.searchMembers(query);
+        List<Member> searchResults = memberInfoService.searchMembers(query);
         model.addAttribute("members", searchResults);
         return "member/searchResults";
     }
