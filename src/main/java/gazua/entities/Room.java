@@ -1,15 +1,14 @@
 package gazua.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -20,6 +19,9 @@ public class Room {
 
     @Id @GeneratedValue
     private Long roomNum; // 숙소 번호
+
+    @Column(length=65, nullable = false)
+    private String gid = UUID.randomUUID().toString();
 
     private String sellerId;
 
@@ -41,4 +43,12 @@ public class Room {
     private String roomInfo;
 
 
+    @Transient
+    private List<FileInfo> mainImages; // 상품 메인 이미지
+
+    @Transient
+    private List<FileInfo> listImages; // 목록 이미지
+
+    @Transient
+    private List<FileInfo> descImages; // 상세 이미지
 }
