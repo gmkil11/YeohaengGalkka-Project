@@ -4,5 +4,28 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>등록한 숙소 목록</h1>
+    <table class="table-cols">
+        <thead>
+        <tr>
+            <th>객실 번호</th>
+            <th>사업자 이메일</th>
+            <th>최대 수용 인원수</th>
+            <th>객실 이름</th>
+            <th>객실 가격</th>
+            <!-- 추가 필요한 열들 -->
+        </tr>
+        </thead>
+        <tbody>
+        <!-- 숙소 목록 데이터를 순회하며 출력 -->
+        <tr th:each="room : ${items}" th:object="${room}">
+            <td th:text="*{sellerId}"></td>
+            <td th:text="*{roomCount}"></td>
+            <td th:text="*{roomName}"></td>
+            <td th:text="*{roomPr}"></td>
+            <!-- 추가 필요한 열들에 대한 데이터 표시 -->
+        </tr>
+        </tbody>
+    </table>
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </html>
