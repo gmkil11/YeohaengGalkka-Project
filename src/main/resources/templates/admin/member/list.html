@@ -4,6 +4,14 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>회원 목록</h1>
+
+    <!-- 검색 폼 추가 -->
+    <form method="get" th:action="@{/admin/member}" class="search-form">
+        <label for="search">회원 검색:</label>
+        <input type="text" id="search" name="search" th:value="${param.search}" placeholder="이메일 또는 이름으로 검색">
+        <button type="submit">검색</button>
+    </form>
+
     <form method="post" th:action="@{/admin/member}">
         <table class="table-cols">
             <thead>
