@@ -2,23 +2,17 @@ package gazua.controllers.admins;
 
 import gazua.commons.CommonProcess;
 import gazua.commons.ScriptExceptionProcess;
-import gazua.commons.constants.MemberType;
 import gazua.commons.menus.Menu;
 import gazua.commons.menus.MenuDetail;
-import gazua.controllers.admins.dtos.MemberAdminForm;
 import gazua.entities.Member;
-import gazua.models.member.MemberUpdateService;
+import gazua.models.member.MemberSearchService;
 import gazua.repositories.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import oracle.jdbc.proxy.annotation.Post;
-import org.hibernate.validator.constraints.ScriptAssert;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,28 +27,23 @@ import java.util.Optional;
 public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
     private final HttpServletRequest request;
+    private final MemberSearchService memberSearchService;
     private final MemberRepository repository;
 
-    private final MemberUpdateService updateService;
 
     @GetMapping
-    public String list(Model model) {
+    public String list(@RequestParam(name = "search", required = false) String search ,Model model) {
         commonProcess("list", model);
         List<Member> memberList = repository.findAll();
         model.addAttribute("memberList", memberList);
 
+         if (search != null && !search.isEmpty()) {
+             model.addAttribute("memberList", repository.findByUserNmContainingIgnoreCaseOrEmailContainingIgnoreCase(search, search));
+         } else {
+                model.addAttribute("memberList", memberList);
+            }
+
         return "admin/member/list";
-    }
-
-    @PostMapping("/update")
-    public String listPs(MemberAdminForm form, Model model) {
-
-        updateService.updates(form);
-
-        // 수정 성공시에는 새로고침
-        model.addAttribute("script", "parent.location.reload()");
-
-        return "common/_execute_script";
     }
 
     @PostMapping
@@ -112,24 +101,10 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
     }
 
     @PostMapping("/role")
-    public String rolePost(@RequestParam(name = "email", required = false)String email,
-                           @RequestParam(name = "submitButton", required = false) String submitButton,
-                           @RequestParam(name = "mtype", required = false) String mtype,
-                           Model model, HttpSession session) {
+    public String rolePost(@RequestParam String email, Model model) {
         commonProcess("role", model);
-        if("search".equals(submitButton)) {
-            Optional<Member> member = repository.findByEmail(email);
-            model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
-            session.setAttribute("editMember", member.get());
-        }
-        if("delete".equals(submitButton)) {
-            Member member = (Member) session.getAttribute("editMember");
-            if(mtype.equals("USER")) {member.setMtype(MemberType.USER);}
-            else if(mtype.equals("ADMIN")) {member.setMtype(MemberType.ADMIN);}
-
-            repository.saveAndFlush(member); // 변경 내용을 데이터베이스에 저장
-            session.removeAttribute("editMember");
-        }
+        Optional<Member> member = repository.findByEmail(email);
+        model.addAttribute("member", member.orElse(null)); // Optional을 null로 변환
 
         return "admin/member/role";
     }
@@ -148,10 +123,6 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
         CommonProcess.super.commonProcess(model, pageTitle);
 
-        if (mode.equals("list")) {
-            model.addAttribute("memberTypes", MemberType.getList());
-        }
-
         model.addAttribute("menuCode", "member");
 
         String subMenuCode = Menu.getSubMenuCode(request);
@@ -159,5 +130,12 @@ public class MemberController implements CommonProcess, ScriptExceptionProcess {
 
         List<MenuDetail> submenus = Menu.gets("member");
         model.addAttribute("submenus", submenus);
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        List<Member> searchResults = memberSearchService.searchMembers(query);
+        model.addAttribute("members", searchResults);
+        return "member/searchResults";
     }
 }
