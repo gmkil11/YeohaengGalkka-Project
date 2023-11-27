@@ -48,34 +48,34 @@
             <pre class="terms" th:text="${@siteConf.get('joinTerms')}"></pre>
             <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
             <div class="checkbox-container">
-                <div id="checkboxAll" class="checkbox"></div>
                 <input type="checkbox" class="agree allAgree" id="selectAll" name="agree"  onclick='toggleAll(this); toggleCheckbox();'  th:field="*{agree}">
+                <label id="checkboxAll" class="checkbox" for="selectAll"></label>
                 <label for="selectAll" class="allAgreeText" th:text="#{모두_확인하였으며_동의합니다.}"></label>
             </div>
             <hr>
 
             <div class="checkbox-container">
-                <div id="checkbox1" class="checkbox"></div>
                 <input type="checkbox" id="ageAgree" class="agree"  name="ageAgree" onclick=' checkSelectAll(); toggleCheckbox();' value="true">
+                <label id="checkbox1" class="checkbox" for="ageAgree"></label>
                 <label for="ageAgree" class="agreeText" th:text="#{만_14세_이상_이용동의}"></label>
             </div>
 
             <div class="checkbox-container">
-                <div id="checkbox2" class="checkbox"></div>
                 <input type="checkbox" id="termsOfUser" class="agree"  name="termsOfUser" onclick=' checkSelectAll(); toggleCheckbox();' value="true" >
+                <label id="checkbox2" class="checkbox" for="termsOfUser"></label>
                 <label for="termsOfUser" class="agreeText" th:text="#{여행갈까_이용약관_동의}"></label>
             </div>
 
             <div class="checkbox-container">
-                <div id="checkbox3" class="checkbox"></div>
                 <input type="checkbox" id="privacy" class="agree"  name="privacy" onclick=' checkSelectAll(); toggleCheckbox();' value="true" >
+                <label id="checkbox3" class="checkbox" for="privacy"></label>
                 <label for="privacy" class="agreeText" th:text="#{개인정보_수집_및_이용_동의}"></label>
             </div>
 
             <div class="checkbox-container">
-                <div id="checkbox4" class="checkbox"></div>
-                <label for="thirdPartyAgree" class="agreeText" th:text="#{개인정보_제3자_제공_동의}"></label>
                 <input type="checkbox" id="thirdPartyAgree" class="agree"  name="thirdPartyAgree" onclick=' checkSelectAll(); toggleCheckbox();' value="true" >
+                <label id="checkbox4" class="checkbox" for="thirdPartyAgree"></label>
+                <label for="thirdPartyAgree" class="agreeText" th:text="#{개인정보_제3자_제공_동의}"></label>
             </div>
         </div>
 
