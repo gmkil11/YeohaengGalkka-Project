@@ -9,7 +9,7 @@
     <form method="get" th:action="@{/admin/member}" class="search-form">
         <label for="search">회원 검색:</label>
         <input type="text" id="search" name="search" th:value="${param.search}" placeholder="이메일 또는 이름으로 검색">
-        <button type="submit">검색</button>
+        <button type="submit" class="sbtn" style="margin: 10px 0">검색</button>
     </form>
 
     <form method="post" th:action="@{/admin/member/update}" target="ifrmProcess" autocomplete="off">

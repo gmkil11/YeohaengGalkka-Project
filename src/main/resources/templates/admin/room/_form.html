@@ -57,8 +57,7 @@
         <tr>
             <th>메인 이미지</th>
             <td>
-                <span>메인 페이지에 들어갈 대표사진 입니다</span>
-                <span>한장만 첨부 가능</span>
+                <p>메인 페이지에 들어갈 대표사진 입니다</p>
                 <button type="button" class="sbtn upload_files" data-location="main">이미지 업로드</button>
                 <div id="main_images" class="uploaded_images">
                     <div th:if="*{mainImages != null}" th:each="file : *{mainImages}" th:object="${file}" class="file_images" th:id="*{'file_' + id}">
@@ -74,7 +73,7 @@
         <tr>
             <th>목록 이미지</th>
             <td>
-                <span>객실 목록에서 사용될 이미지 입니다</span>
+                <p>객실 목록에서 사용될 이미지 입니다</p>
                 <button type="button" class="sbtn upload_files" data-location="list">이미지 업로드</button>
                 <div id="list_images" class="uploaded_images">
                     <div th:if="*{listImages != null}" th:each="file : *{listImages}" th:object="${file}" class="file_images" th:id="*{'file_' + id}">
@@ -89,7 +88,7 @@
         <tr>
             <th>상세 이미지</th>
             <td>
-                <span>상세 페이지에 들어갈 사진 입니다</span>
+                <p>상세 페이지에 들어갈 사진 입니다</p>
                 <button type="button" class="sbtn upload_files" data-location="desc">이미지 업로드</button>
                 <div id="desc_images" class="uploaded_images">
                     <div th:if="*{descImages != null}" th:each="file : *{descImages}" th:object="${file}" class="file_images" th:id="*{'file_' + id}">
