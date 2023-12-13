@@ -577,3 +577,43 @@ p {
 
 .map { margin: 3vh 0 10vh 11vw; }
 /* 객실 상세보기 끝*/
+
+/* 객실 결제 페이지 시작 */
+.roomPay-img { width: 50vw;  margin: 20px auto; display: block}
+
+.roomPay-name {margin: 0}
+
+.roomPay-price { display: flex; align-items: center; margin-bottom: 30px;}
+
+.roomPay-price h1{
+    color: #000;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.72px;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.roomPay-price p {
+    color: #787878;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.54px;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.pay-hr { width: 60vw; margin-top: 10px}
+
+.roomPay-span {display: flex; justify-content: space-between; margin: 10px 0}
+
+.refund-info {max-width: 50vw; margin: 0 auto;}
+
+.refund-section { margin-bottom: 20px; }
+.refund-section p { text-align: left; }
+
+/* 객실 결제 페이지 끝 */

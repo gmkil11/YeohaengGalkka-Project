@@ -62,7 +62,8 @@
     </div>
     <hr class="title-hr"/>
     <!--결제 박스-->
-    <form class="pay-box" method="post" id="payBox">
+    <form class="pay-box" method="post" id="payBox" th:action="@{'/room/' + ${roomNum} + '/pay'}"
+    >
         <div class="pay-box-price">
             <h1>135,000₩</h1>
             <p>/박</p>
@@ -74,16 +75,16 @@
                         <img th:src="@{/img/icons/calender.svg}">
                         <p>기간</p>
                     </div>
-                    <input type="text" id="startDate" class="date-picker" placeholder="시작일">
+                    <input type="text" id="startDate" class="date-picker" name="startDate" placeholder="시작일">
                     <hr class="select-box-hr"/>
-                    <input type="text" id="endDate" class="date-picker" placeholder="종료일">
+                    <input type="text" id="endDate" class="date-picker" name="endDate" placeholder="종료일">
                 </div>
                 <div class="select-p-box">
                     <div class="select-day-box">
                         <img th:src="@{/img/icons/people.svg}">
                         <p class="pr">인수</p>
                     </div>
-                    <select>
+                    <select name="count">
                         <option th:each="count : ${#numbers.sequence(1, room.roomCount)}" th:value="${count}" th:text="${count} + 명">객실 최대 수용 인수</option>
                     </select>
                 </div>
