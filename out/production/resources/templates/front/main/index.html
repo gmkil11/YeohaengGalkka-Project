@@ -3,9 +3,93 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 
-<main layout:fragment="content">
+<th:block layout:fragment="addCss">
 
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/front/css/swiperMain.css}">
 
+</th:block>
+
+<th:block layout:fragment="addScript">
+
+    <!-- Swiper JS -->
+    <script th:src="@{/front/js/swiperMain.js}"></script>
+
+</th:block>
+
+<main layout:fragment="content" class="main-style">
+    <!-- 배너 시작 -->
+    <div class="banner" name="banner">
+        <img src="https://img.freepik.com/free-photo/beautiful-beach-and-sea_74190-6620.jpg?w=1060&t=st=1700922019~exp=1700922619~hmac=eb4193d27e15a3109c3f486ab84f86e331dc05fce0d0e249b4cfda93fbf073b1">
+        <div class="banner_btn" th:onclick="|window.location.href='@{/#}'|">
+            보러가기
+            <img th:src="@{img/icons/rightArrow.svg}">
+        </div>
+    </div>
+    <!-- 배너 끝 -->
+
+    <!-- 숙소 분류 별 메뉴 시작 -->
+    <div class="category-box">
+        <div class="category" th:onclick="|window.location.href='@{/#}'|">
+            <img th:src="@{img/front/pension.svg}" alt="펜션 아이콘">
+            <a>펜션</a>
+        </div>
+        <div class="category" th:onclick="|window.location.href='@{/#}'|">
+            <img th:src="@{img/front/hotel.svg}" alt="호텔·리조트 아이콘">
+            <a>호텔·리조트</a>
+        </div>
+        <div class="category" th:onclick="|window.location.href='@{/#}'|">
+            <img th:src="@{img/front/motel.svg}" alt="모텔 아이콘">
+            <a>모텔</a>
+        </div>
+        <div class="category" th:onclick="|window.location.href='@{/#}'|">
+            <img th:src="@{img/front/guestHouse.svg}" alt="게스트 하우스 아이콘">
+            <a>게스트 하우스</a>
+        </div>
+        <div class="category" th:onclick="|window.location.href='@{/#}'|">
+            <img th:src="@{img/front/camp.svg}" alt="글램핑·캠프 아이콘">
+            <a>글램핑·캠프</a>
+        </div>
+    </div>
+    <!-- 숙소 분류 별 메뉴 끝 -->
+
+    <!--  추천 객실 1 시작 -->
+    <div class="card-top-exp" th:if="${#lists.size(roomList) > 0}">
+        <div>
+            <span>기다리던 휴가, </span>
+            <span> 가족과 함께라면?</span>
+        </div>
+        <a th:href="@{/#}">더보기</a>
+    </div>
+    <th:block th:replace="~{front/main/_swiper_1::common}"></th:block>
+
+    <!--  추천 객실 1 끝 -->
+
+    <!--  추천 객실 2 시작 -->
+    <div class="card-top-exp">
+        <div>
+            <span>아껴둔 연차로 </span>
+            <span>연인과 떠나는 여행</span>
+        </div>
+        <a th:href="@{/#}">더보기</a>
+    </div>
+    <th:block th:replace="~{front/main/_swiper_2::common}"></th:block>
+
+    <!--  추천 객실 2 끝 -->
+
+    <!--  추천 객실 3 시작 -->
+    <div class="card-top-exp">
+        <div>
+            <span>환상의 섬 </span>
+            <span>제주도 어때요?</span>
+        </div>
+        <a th:href="@{/#}">더보기</a>
+    </div>
+    <th:block th:replace="~{front/main/_swiper_3::common}"></th:block>
+
+    <!--  추천 객실 3 끝 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </main>
 
 </html>
