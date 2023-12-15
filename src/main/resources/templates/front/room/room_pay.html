@@ -11,18 +11,41 @@
         var IMP = window.IMP;
         IMP.init("imp77083624");
 
+
         function requestPay() {
+            let roomName = document.getElementById("roomName").value;
+            let totalPr = document.getElementById("totalPr").value;
+
+            let memberData = document.getElementById("memberData").value;
+
+            let emailPattern = /email=([^,]+)/;
+            let match = memberData.match(emailPattern);
+            // match 배열의 두 번째 요소에 이메일이 들어 있음
+            let email = match ? match[1] : null;
+
+            // userNm을 추출하는 정규표현식
+            let userNmPattern = /userNm=([^,]+)/;
+            let matchUserNm = memberData.match(userNmPattern);
+
+            // matchUserNm 배열의 두 번째 요소에 userNm이 들어 있음
+            let userNm = matchUserNm ? matchUserNm[1] : null;
+
+            // 전화번호를 추출하는 정규표현식
+            let mobilePattern = /mobile=([^,]+)/;
+            let matchMobile = memberData.match(userNmPattern);
+
+            // matchUserNm 배열의 두 번째 요소에 userNm이 들어 있음
+            let mobile = matchMobile ? matchMobile[1] : null;
+
             IMP.request_pay({
                 pg: "html5_inicis",
                 pay_method: "card",
                 merchant_uid: "ORD20180131-0000011",   // 주문번호
-                name: "노르웨이 회전 의자",
-                amount: 64900,                         // 숫자 타입
-                buyer_email: "gildong@gmail.com",
-                buyer_name: "홍길동",
-                buyer_tel: "010-4242-4242",
-                buyer_addr: "서울특별시 강남구 신사동",
-                buyer_postcode: "01181"
+                name: roomName,
+                amount: totalPr,                         // 숫자 타입
+                buyer_email: email,
+                buyer_name: userNm,
+                buyer_tel: mobile,
             }, function (rsp) { // callback
                 console.log(rsp);
                 if (rsp.success) {
@@ -36,16 +59,28 @@
                 }
             });
         }
+
+        function validateAndRequestPay() {
+            let agree = document.getElementById("agree");
+            if (!agree.checked) {
+                alert("결제 사항에 동의해주세요.")
+            } else {
+                requestPay();
+            }
+        }
     </script>
     <meta charset="UTF-8">
     <title>결제</title>
 </head>
 <main layout:fragment="content" class="main-style">
+    <input type="hidden" id="memberData" th:value="${member}" /> <!-- 로그인 정보 -->
+    <input type="hidden" id="roomName" th:value="${room.getRoomName()}">
+    <input type="hidden" id="totalPr" th:value="${totalPr}">
     <div>
         <img th:src="${room.getMainImages[0].fileUrl}" alt="객실 메인 이미지" class="roomPay-img">
         <h1 th:text="${room.getRoomName()}" class="roomPay-name">객실 이름</h1>
         <div class="roomPay-price">
-            <h1 th:text="${room.getRoomPr()}">가격</h1>
+            <h1 th:text="${#numbers.formatInteger(room.getRoomPr(), 3, 'COMMA')} +'원'">가격</h1>
             <p>/박</p>
         </div>
         <div class="roomPay-span">
@@ -59,7 +94,7 @@
         <hr class="pay-hr">
         <div class="roomPay-span">
             <h2>총비용</h2>
-            <h2 th:text="${totalPr} + '원'">가격</h2>
+            <h2 th:text="${totalPrParse} + '원'">가격</h2>
         </div>
         <div class="refund-info">
             <div class="refund-section">
@@ -93,6 +128,6 @@
             </div>
         </div>
     </div>
-    <button onclick="requestPay()"  class="login_button">결제하기</button> <!-- 결제하기 버튼 생성 -->
+    <button onclick="validateAndRequestPay()"  class="login_button">결제하기</button> <!-- 결제하기 버튼 생성 -->
 </main>
 </html>

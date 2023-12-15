@@ -1,5 +1,8 @@
 package gazua.controllers.mains;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import gazua.entities.Member;
 import gazua.entities.Room;
 import gazua.models.room.config.RoomConfigInfoService;
 import gazua.repositories.FileInfoRepository;
@@ -34,21 +37,26 @@ public class RoomController {
 
 
     @GetMapping("/{roomNum}")
-    public String viewRoom(@PathVariable Long roomNum, Model model) {
+    public String viewRoom(@PathVariable Long roomNum, Model model, HttpSession session) {
+        Object member = session.getAttribute("loginMember");
 
         Room room = roomConfigInfoService.get(roomNum);
 
-
+        System.out.println(member);
         System.out.println(room);
         model.addAttribute("room", room);
-
+        model.addAttribute("member", member);
 
         return "front/room/room";
     }
 
     @PostMapping("/{roomNum}/pay")
-    public String payRoomPost(@PathVariable Long roomNum, Model model, HttpServletRequest request) {
+    public String payRoomPost(@PathVariable Long roomNum, Model model, HttpServletRequest request, HttpSession session) {
         Room room = roomConfigInfoService.get(roomNum);
+        Object member = session.getAttribute("loginMember");
+
+
+
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
         String count = request.getParameter("count");
@@ -65,14 +73,15 @@ public class RoomController {
         DecimalFormat df = new DecimalFormat("###,###");
         String totalPrParse = df.format(totalPr);
 
-
+        model.addAttribute("member", member);
         model.addAttribute("room", room);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("count", count);
         model.addAttribute("days", daysDiff);
-        model.addAttribute("totalPr", totalPrParse);
-        System.out.println(startDate);
+        model.addAttribute("totalPr", totalPr);
+        model.addAttribute("totalPrParse", totalPrParse);
+        System.out.println(member );
 
         return "front/room/room_pay";
     }
