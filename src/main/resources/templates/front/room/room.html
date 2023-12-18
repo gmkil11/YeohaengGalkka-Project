@@ -92,7 +92,7 @@
     <form class="pay-box" method="post" id="payBox" th:action="@{'/room/' + ${roomNum} + '/pay'}"
     >
         <div class="pay-box-price">
-            <h1>135,000₩</h1>
+            <h1 th:text="${room.getRoomPr()+'₩'}">객실 가격</h1>
             <p>/박</p>
         </div>
         <div class="pay-box-info">
