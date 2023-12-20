@@ -15,8 +15,10 @@
         function requestPay() {
             let roomName = document.getElementById("roomName").value;
             let totalPr = document.getElementById("totalPr").value;
-
             let memberData = document.getElementById("memberData").value;
+            let startDate = document.getElementById("startDate").value;
+            let endDate = document.getElementById("endDate").value;
+            let roomNum = document.getElementById("roomNum").value;
 
             let emailPattern = /email=([^,]+)/;
             let match = memberData.match(emailPattern);
@@ -37,10 +39,13 @@
             // matchUserNm 배열의 두 번째 요소에 userNm이 들어 있음
             let mobile = matchMobile ? matchMobile[1] : null;
 
+            // 주문번호 생성 (현재 날짜 8자리 + 랜덤 숫자 4자리)
+            let OrderNumber = generateOrderNumber();
+
             IMP.request_pay({
                 pg: "html5_inicis",
                 pay_method: "card",
-                merchant_uid: "ORD20180131-0000011",   // 주문번호
+                merchant_uid: OrderNumber,   // 주문번호
                 name: roomName,
                 amount: totalPr,                         // 숫자 타입
                 buyer_email: email,
@@ -51,7 +56,8 @@
                 if (rsp.success) {
                     var msg = '결제가 완료되었습니다.';
                     alert(msg);
-                    location.href = "/#"
+                    saveBookingData(roomName, email, userNm, mobile, totalPr, OrderNumber, startDate, endDate, roomNum)
+                    window.location.href("/");
                 } else {
                     var msg = '결제에 실패하였습니다.';
                     msg += '에러내용 : ' + rsp.error_msg;
@@ -60,17 +66,26 @@
             });
         }
 
-        function saveBookingData(roomName, email, userNm, mobile, totalPr) {
+        function saveBookingData(roomName, email, userNm, mobile, totalPr, OrderNumber, startDate, endDate, roomNum) {
+            var csrfToken = $("meta[name='_csrf']").attr("content");
+            var csrfHeader = $("meta[name='_csrf_header']").attr("content");
             // Ajax를 이용하여 서버에 데이터 전송
             $.ajax({
                 type: 'POST',
                 url: '/saveBookingData',  // 저장을 담당하는 서버 API 엔드포인트
+                beforeSend: function(request) {
+                    request.setRequestHeader(csrfHeader, csrfToken);
+                },
+                contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
                 data: {
+                    bo_num: OrderNumber,
                     roomName: roomName,
-                    email: email,
+                    email:email,
                     userNm: userNm,
-                    mobile: mobile,
-                    totalPr: totalPr
+                    price: totalPr,
+                    checkin: startDate,
+                    checkout: endDate,
+                    roomNum: roomNum
                 },
                 success: function (response) {
                     console.log(response);
@@ -89,6 +104,18 @@
                 requestPay();
             }
         }
+
+        function generateOrderNumber() {
+            let currentDate = new Date();
+            let year = currentDate.getFullYear();
+            let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            let day = currentDate.getDate().toString().padStart(2, '0');
+            let dateString = `${year}${month}${day}`;
+
+            let randomDigits = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+
+            return dateString + randomDigits;
+        }
     </script>
     <meta charset="UTF-8">
     <title>결제</title>
@@ -97,6 +124,9 @@
     <input type="hidden" id="memberData" th:value="${member}" /> <!-- 로그인 정보 -->
     <input type="hidden" id="roomName" th:value="${room.getRoomName()}">
     <input type="hidden" id="totalPr" th:value="${totalPr}">
+    <input type="hidden" id="startDate" th:value="${startDate}">
+    <input type="hidden" id="endDate" th:value="${endDate}">
+    <input type="hidden" id="roomNum" th:value="${roomNum}">
     <div>
         <img th:src="${room.getMainImages[0].fileUrl}" alt="객실 메인 이미지" class="roomPay-img">
         <h1 th:text="${room.getRoomName()}" class="roomPay-name">객실 이름</h1>

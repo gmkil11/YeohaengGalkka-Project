@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long>, QuerydslPredicateExecutor<Member> {
     Optional<Member> findByEmail(String email);
 
+    Member findByUserNm(String UserNm);
+
     /**
      * 등록된 회원 여부 체크
      *

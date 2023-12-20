@@ -1,12 +1,14 @@
 package gazua.controllers.mains;
 
+import gazua.entities.Booking;
+import gazua.entities.Member;
+import gazua.models.member.MemberInfoService;
 import gazua.models.room.booking.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController
 public class BookingController {
@@ -14,18 +16,39 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @PostMapping("/saveBookingData")
-    public ResponseEntity<String> saveBookingData(@RequestParam String roomName,
-                                                  @RequestParam String email,
-                                                  @RequestParam String userNm,
-                                                  @RequestParam String mobile,
-                                                  @RequestParam String totalPr) {
+    @Autowired
+    private MemberInfoService memberInfoService;
+
+    @PostMapping(value = "/saveBookingData", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    public String saveBookingData(@RequestParam String bo_num,
+                                  @RequestParam String roomName,
+                                  @RequestParam String userNm,
+                                  @RequestParam String checkin,
+                                  @RequestParam String checkout,
+                                  @RequestParam String roomNum,
+                                  @RequestParam String price) {
+
+        Member member = memberInfoService.findByUserNm(userNm);
+
+        Booking booking = Booking.builder()
+                .bo_num(bo_num)
+                .bu_title(roomName)
+                .member(member)
+                .checkin(checkin)
+                .status("예약 완료")
+                .checkout(checkout)
+                .price(price)
+                .reg_date(LocalDateTime.now())
+                .ro_num(roomNum)
+                .build();
+
+        System.out.println(booking.toString() + booking + "booking입니다");
+
         try {
-            // 여기서 BookingService를 통해 데이터를 저장하도록 호출
-            bookingService.saveBookingData(roomName, email, userNm, mobile, totalPr);
-            return new ResponseEntity<>("Data saved successfully", HttpStatus.OK);
+            bookingService.saveBookingData(booking);
+            return "예약 데이터가 성공적으로 저장되었습니다";
         } catch (Exception e) {
-            return new ResponseEntity<>("Error saving data", HttpStatus.INTERNAL_SERVER_ERROR);
+            return "예약 데이터 저장 중 오류 발생: " + e.getMessage();
         }
     }
 }
