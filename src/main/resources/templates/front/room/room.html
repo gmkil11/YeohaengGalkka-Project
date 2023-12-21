@@ -27,8 +27,35 @@
     <script th:src="@{/front/js/datepicker.js}"></script>
     <script th:src="@{/front/js/datepicker-ko.js}"></script>
 
+    <script>
+        function isLogin() {
+            const origin = window.location.origin;
+            const member = document.getElementById("memberData").value;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const count = document.getElementById("count").value;
+
+            if (member === null || member === "") {
+                alert("로그인이 필요합니다.");
+                // 로그인 페이지로 이동
+                window.location.href = `${origin}/member/login`;
+            } else {
+                // 로그인이 되어 있으면 폼 제출
+                if (startDate === "" || startDate === null || endDate === "" || endDate === null || count === "" || count === null) {
+                    alert("숙박 기간과 인원수를 입력해주세요.")
+                } else if (startDate === endDate) {
+                    alert("숙박 기간은 1박 이상이여야 합니다.")
+                } else {
+                    document.getElementById("payBox").submit();
+                }
+            }
+            return false; // 폼이 제출되지 않도록 false 반환
+        }
+    </script>
+
 </th:block>
 <main layout:fragment="content">
+    <input type="hidden" id="memberData" th:value="${member}" /> <!-- 로그인 정보 -->
     <!--스위퍼-->
     <div class="swiper-box">
         <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
@@ -62,9 +89,10 @@
     </div>
     <hr class="title-hr"/>
     <!--결제 박스-->
-    <form class="pay-box" method="post" id="payBox">
+    <form class="pay-box" method="post" id="payBox" th:action="@{'/room/' + ${roomNum} + '/pay'}"
+    >
         <div class="pay-box-price">
-            <h1>135,000₩</h1>
+            <h1 th:text="${room.getRoomPr()+'₩'}">객실 가격</h1>
             <p>/박</p>
         </div>
         <div class="pay-box-info">
@@ -74,16 +102,16 @@
                         <img th:src="@{/img/icons/calender.svg}">
                         <p>기간</p>
                     </div>
-                    <input type="text" id="startDate" class="date-picker" placeholder="시작일">
+                    <input type="text" id="startDate" class="date-picker" name="startDate" placeholder="시작일">
                     <hr class="select-box-hr"/>
-                    <input type="text" id="endDate" class="date-picker" placeholder="종료일">
+                    <input type="text" id="endDate" class="date-picker" name="endDate" placeholder="종료일">
                 </div>
                 <div class="select-p-box">
                     <div class="select-day-box">
                         <img th:src="@{/img/icons/people.svg}">
-                        <p class="pr">인수</p>
+                        <p class="pr">인원</p>
                     </div>
-                    <select>
+                    <select name="count" id="count">
                         <option th:each="count : ${#numbers.sequence(1, room.roomCount)}" th:value="${count}" th:text="${count} + 명">객실 최대 수용 인수</option>
                     </select>
                 </div>
@@ -91,7 +119,7 @@
             <p class="select-box-info" th:text="${room.getRoomInfo2()}">
                 객실 설명2
             </p>
-            <button type="submit" class="login_button">예약하기</button>
+            <button type="button" class="login_button" onclick="isLogin()">예약하기</button>
         </div>
     </form>
 

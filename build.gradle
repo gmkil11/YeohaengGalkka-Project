@@ -48,6 +48,12 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'com.oracle.database.nls:orai18n:23.2.0.0'
+	implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
+	allprojects {
+		repositories {
+			maven { url 'https://jitpack.io' }
+		}
+	}
 }
 
 tasks.named('bootBuildImage') {

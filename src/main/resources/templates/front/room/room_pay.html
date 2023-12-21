@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<head>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script>
+        var IMP = window.IMP;
+        IMP.init("imp77083624");
+
+
+        function requestPay() {
+            let roomName = document.getElementById("roomName").value;
+            let totalPr = document.getElementById("totalPr").value;
+            let memberData = document.getElementById("memberData").value;
+            let startDate = document.getElementById("startDate").value;
+            let endDate = document.getElementById("endDate").value;
+            let roomNum = document.getElementById("roomNum").value;
+
+            let emailPattern = /email=([^,]+)/;
+            let match = memberData.match(emailPattern);
+            // match 배열의 두 번째 요소에 이메일이 들어 있음
+            let email = match ? match[1] : null;
+
+            // userNm을 추출하는 정규표현식
+            let userNmPattern = /userNm=([^,]+)/;
+            let matchUserNm = memberData.match(userNmPattern);
+
+            // matchUserNm 배열의 두 번째 요소에 userNm이 들어 있음
+            let userNm = matchUserNm ? matchUserNm[1] : null;
+
+            // 전화번호를 추출하는 정규표현식
+            let mobilePattern = /mobile=([^,]+)/;
+            let matchMobile = memberData.match(userNmPattern);
+
+            // matchUserNm 배열의 두 번째 요소에 userNm이 들어 있음
+            let mobile = matchMobile ? matchMobile[1] : null;
+
+            // 주문번호 생성 (현재 날짜 8자리 + 랜덤 숫자 4자리)
+            let OrderNumber = generateOrderNumber();
+
+            IMP.request_pay({
+                pg: "html5_inicis",
+                pay_method: "card",
+                merchant_uid: OrderNumber,   // 주문번호
+                name: roomName,
+                amount: totalPr,                         // 숫자 타입
+                buyer_email: email,
+                buyer_name: userNm,
+                buyer_tel: mobile,
+            }, function (rsp) { // callback
+                console.log(rsp);
+                if (rsp.success) {
+                    var msg = '결제가 완료되었습니다.';
+                    alert(msg);
+                    saveBookingData(roomName, email, userNm, mobile, totalPr, OrderNumber, startDate, endDate, roomNum)
+                    window.location.href("/");
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                    alert(msg);
+                }
+            });
+        }
+
+        function saveBookingData(roomName, email, userNm, mobile, totalPr, OrderNumber, startDate, endDate, roomNum) {
+            var csrfToken = $("meta[name='_csrf']").attr("content");
+            var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+            // Ajax를 이용하여 서버에 데이터 전송
+            $.ajax({
+                type: 'POST',
+                url: '/saveBookingData',  // 저장을 담당하는 서버 API 엔드포인트
+                beforeSend: function(request) {
+                    request.setRequestHeader(csrfHeader, csrfToken);
+                },
+                contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+                data: {
+                    bo_num: OrderNumber,
+                    roomName: roomName,
+                    email:email,
+                    userNm: userNm,
+                    price: totalPr,
+                    checkin: startDate,
+                    checkout: endDate,
+                    roomNum: roomNum
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function validateAndRequestPay() {
+            let agree = document.getElementById("agree");
+            if (!agree.checked) {
+                alert("결제 사항에 동의해주세요.")
+            } else {
+                requestPay();
+            }
+        }
+
+        function generateOrderNumber() {
+            let currentDate = new Date();
+            let year = currentDate.getFullYear();
+            let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            let day = currentDate.getDate().toString().padStart(2, '0');
+            let dateString = `${year}${month}${day}`;
+
+            let randomDigits = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+
+            return dateString + randomDigits;
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>결제</title>
+</head>
+<main layout:fragment="content" class="main-style">
+    <input type="hidden" id="memberData" th:value="${member}" /> <!-- 로그인 정보 -->
+    <input type="hidden" id="roomName" th:value="${room.getRoomName()}">
+    <input type="hidden" id="totalPr" th:value="${totalPr}">
+    <input type="hidden" id="startDate" th:value="${startDate}">
+    <input type="hidden" id="endDate" th:value="${endDate}">
+    <input type="hidden" id="roomNum" th:value="${roomNum}">
+    <div>
+        <img th:src="${room.getMainImages[0].fileUrl}" alt="객실 메인 이미지" class="roomPay-img">
+        <h1 th:text="${room.getRoomName()}" class="roomPay-name">객실 이름</h1>
+        <div class="roomPay-price">
+            <h1 th:text="${#numbers.formatInteger(room.getRoomPr(), 3, 'COMMA')} +'원'">가격</h1>
+            <p>/박</p>
+        </div>
+        <div class="roomPay-span">
+            <span>숙박일</span>
+            <span th:text="${startDate} + ' ~ ' + ${endDate} + '(' + ${days} + '일' + ')'">숙박일</span>
+        </div>
+        <div class="roomPay-span">
+            <span>인수</span>
+            <span th:text="${count} + '명'">투숙 인수</span>
+        </div>
+        <hr class="pay-hr">
+        <div class="roomPay-span">
+            <h2>총비용</h2>
+            <h2 th:text="${totalPrParse} + '₩'">가격</h2>
+        </div>
+        <div class="refund-info">
+            <div class="refund-section">
+                <h2>환불 규정 안내</h2>
+                <p>
+                    예약 취소 시, 숙박 일수에 따라 환불 규정이 적용됩니다.
+                    취소일로부터 7일 전까지는 전액 환불이 이루어지며, 그 이후 취소 시에는 일부 금액이 공제될 수 있습니다.
+                    당일 취소 또는 미도착 시에는 환불이 불가능하며, 전액 결제가 유지됩니다.
+                </p>
+            </div>
+
+            <div class="refund-section">
+                <h2>변경 및 취소 안내</h2>
+                <p>
+                    예약 일정 변경을 원하시는 경우, 최소 3일 전에 요청해 주셔야 합니다.
+                    변경 및 취소는 마이페이지 또는 고객센터를 통해 가능하며, 변경 가능 기간 이후에는 수수료가 부과될 수 있습니다.
+                </p>
+            </div>
+
+            <div class="refund-section">
+                <h2>기타 유의사항</h2>
+                <p>
+                    특별한 사유로 인한 예외적인 환불 요청은 고객센터와 상담 후 처리됩니다.
+                    예약 확정 시, 결제 및 환불 정책에 동의한 것으로 간주되며, 정책 변경 시에는 사전 고지될 예정입니다.
+                    자세한 내용은 이용약관을 참고하시거나, 언제든지 고객센터로 문의해 주세요.
+                </p>
+            </div>
+            <div>
+                <input type="checkbox" id="agree">
+                <label for="agree">결제 사항들을 모두 확인했습니다.</label>
+            </div>
+        </div>
+    </div>
+    <button onclick="validateAndRequestPay()"  class="login_button">결제하기</button> <!-- 결제하기 버튼 생성 -->
+</main>
+</html>
