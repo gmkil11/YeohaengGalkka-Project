@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
@@ -24,14 +25,16 @@
 
     <!-- 인증된 사용자일 때 보여지는 블록 -->
     <th:block th:if="${#authorization.expression('isAuthenticated')}">
-        <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
-        <a th:href="@{/member/logout}" th:text="#{로그아웃}"></a>
+        <div class="header_buttons">
+            <a th:href="@{/mypage}" th:text="#{마이페이지}" class="login_button"></a>
+            <a th:href="@{/member/logout}" th:text="#{로그아웃}" class="join_button"></a>
 
-        <!-- ADMIN 권한이 있는 경우에만 보여지는 링크 -->
-        <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
-           th:href="@{/admin}"
-           th:text="#{사이트_관리}"
-           target="_blank"></a>
+            <!-- ADMIN 권한이 있는 경우에만 보여지는 링크 -->
+            <a th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+               th:href="@{/admin}"
+               th:text="#{사이트_관리}"
+               target="_blank" class="login_button"></a>
+        </div>
     </th:block>
 
     <!-- 비인증 사용자일 때 보여지는 블록 -->

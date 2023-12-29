@@ -75,6 +75,7 @@ header {
     letter-spacing: -0.24px;
     background: none;
     transition: all 0.5s;
+    text-decoration: none;
 }
 
 .join_button:hover{
@@ -97,6 +98,7 @@ header {
     letter-spacing: -0.24px;
     background: #1DC078;
     transition: all 0.5s;
+    text-decoration: none;
 }
 .login_button:hover{ background: #1D9D65; }
 
